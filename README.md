@@ -1,8 +1,8 @@
-# trabalhoMultidiciplinar
+# trabalho Multidiciplinar
 Repósitório para as enregas do trabalho Interdiciplinas. 
 
 --- Nome do projeto---
-Akko
+AKKO
 
 ---Ferramentas que serão utilizadas---
 * Github;
@@ -21,7 +21,7 @@ Akko
 * Open Project;
 
 Grupo:
-  João Pedro Santos Vidiri
+  João Pedro Santos Vidiri;
   Leticia Bruna;
-  Flávio Antonio da Silva
-  Caio Martoni
+  Flávio Antonio da Silva;
+  Caio Martoni;
