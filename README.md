@@ -25,25 +25,3 @@ Grupo:
   Leticia Bruna;
   Flávio Antonio da Silva
   Caio Martoni
-  
-Estrutura de pastas inicial | pode ser alterada:
----Estrutura de pastas--
----Public-html
- |---Site
- | |---Index.html
- | |---Template.php
- | |---Css
- | | |---style.css
- | | |---bootstrap.css
- | | |---reset.css
- | |---js
- | | |---custom.js
- | | |---...
- | |---SQL
- | | |---createdb.php
- | | |---utils.php
- | |---pages
- | | |---...
- |---Adm
- | |---index.html
-=============================
