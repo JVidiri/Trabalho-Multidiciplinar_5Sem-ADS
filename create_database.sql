@@ -1,3 +1,28 @@
+drop table if exists aditional_email;
+drop table if exists adress;
+drop table if exists attachment;
+drop table if exists badge;
+drop table if exists city;
+drop table if exists contact;
+drop table if exists government_district;
+drop table if exists phone;
+drop table if exists post;
+drop table if exists profile_experience;
+drop table if exists profile_grade;
+drop table if exists profile_idiom;
+drop table if exists profile_photo;
+drop table if exists profile_published_work;
+drop table if exists profile_user_site;
+drop table if exists profile_badge;
+drop table if exists published_work;
+drop table if exists profile;
+drop table if exists user_site;
+drop table if exists user;
+drop table if exists idiom;
+drop table if exists grade;
+drop table if exists experience;
+drop table if exists country;
+
 /* User data */
 create table user(
  	user_id int auto_increment,
@@ -5,11 +30,13 @@ create table user(
  	email varchar(255) not null,
  	pass_hash char(64) not null, /* Not store the password without hashing */
  	is_confirmed bit not null, /* 0 if email is not confirmed 1 for email confirmed */
+ 	created date not null, 
  	#Constrants
  	PRIMARY KEY (user_id)
 );
 
-insert into user values (666,'João', 'joao.vidiri@gmail.com', 'hash', 0);
+insert into user values (665,'João', 'joao.vidiri@gmail.com', 'hash', 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', 'hash', 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
 
 /* User profile basics, must be completed with the other data from the other tables */
 create table profile(
@@ -17,17 +44,19 @@ create table profile(
 	fk_user_id int not null, #fk to user_akko
 	complete_name varchar(255) not null,
 	about varchar(500) not null,
-	type bit not null, # 0 for user 1 for institution.
+	type int not null, # 0 for user 1 for institution.
 	birth date not null,
 	alias varchar(64),
-	curriculum varchar(512), #we will encorage the user to stre this in other local and put a link here.
+	curriculum varchar(512), #we will encorage the user to stre this in other local and put a link here.	
 	#Constrants
 	PRIMARY KEY (profile_id),
 	FOREIGN KEY (fk_user_id) REFERENCES user(user_id)
 );
 
-insert into profile values (666, 666, 'João Pedro Santos Vidiri','A great programmer! And a kindfull Dog owner...',1,
+insert into profile values (665, 665, 'João Pedro Santos Vidiri','A great programmer! And a kindfull Dog owner...',1,
 	STR_TO_DATE('03/07/1995', '%d/%m/%Y'), 'jvidiri', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
+insert into profile values (666, 666, 'Leticia Bruna','Queen of the hell...',1,
+	STR_TO_DATE('21/05/1993', '%d/%m/%Y'), 'lbruna', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
 
     /* Store countries */
 	create table country(
@@ -96,8 +125,8 @@ insert into profile values (666, 666, 'João Pedro Santos Vidiri','A great progr
 		FOREIGN KEY (fk_country_id) REFERENCES country(country_id)
 	);
 
-	insert into grade values (01, "Ensino Fundamental incompleto", 1, 55);
-	insert into grade values (02, "Pós graduação completa", 50, 55); 
+	insert into grade values (01, 'Ensino Fundamental incompleto', 1, 55);
+	insert into grade values (02, 'Pós graduação completa', 50, 55); 
 	# 'Pós graduação' is 50 times more important than 'Ensino Fundamental'
 
 		/* Make a link betwhen a grade and a profile */
@@ -225,7 +254,7 @@ insert into profile values (666, 666, 'João Pedro Santos Vidiri','A great progr
 		    idiom_level int not null,# 1 for Fluent, 
 		    						 # 2 for Advanced, 
 		    						 # 3 for Medium,
-		    						 # 4 for 'User don't know the idiom'
+		    						 # 4 for User do not know the idiom
 		    #Constrants
 			PRIMARY KEY (fk_idiom_id, fk_profile_id),
 			FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id),
@@ -272,7 +301,7 @@ create table post(
 insert into post values (01, 666, 'Meu primeiro post', STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
 
 	/* This will store the attachiments */
-	create table attachment_akko(
+	create table attachment(
 		attachment_id int,
 		att_date date not null,
 		att_path varchar(500) not null, #Where the file was stored in the server, 
@@ -283,4 +312,50 @@ insert into post values (01, 666, 'Meu primeiro post', STR_TO_DATE('21/03/2016',
 		FOREIGN KEY (fk_post_id) REFERENCES post(post_id)
 	);
 
-	insert into attachment_akko values (01, STR_TO_DATE('21/03/2016', '%d/%m/%Y'), "/att/01/823ry814hqfidfh.jpg", 01 );
+	insert into attachment values (01,
+										STR_TO_DATE('21/03/2016', '%d/%m/%Y'),
+										'/att/01/823ry814hqfidfh.jpg', 01 );
+
+# That will make a link betwheen a user and other user
+create table contact(
+	fk_profile_id int not null,
+	fk_profile_id_contact int not null,
+	# type int not null,
+	is_accepted bit not null, # If the contact accepted the friendship
+	accepted_date date,
+	# Constrants
+	PRIMARY KEY (fk_profile_id, fk_profile_id_contact),
+	FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id),
+	FOREIGN KEY (fk_profile_id_contact) REFERENCES profile(profile_id)
+);
+
+insert into contact values (665,666, 0, STR_TO_DATE('22/03/2016', '%d/%m/%Y'));
+
+# medals will be created by the internal team.
+create table badge(
+	badge_id int not null,
+	type varchar(64) not null,
+	title varchar(64) not null,
+	description varchar(511),
+	thumb varchar(255) not null,
+	# Constrants
+	PRIMARY KEY (badge_id)
+);
+
+insert into badge values(01, 'Informatica', 'SQL Junior', 'This user knows the basics of SQL and have some practical experience with it.','/img/medals/askjdfhlajdhfjas.jpg');
+insert into badge values(02, 'Hell\'s', 'HR of hell', 'This User makes the Human resources os Hell.','img/medals/askjdfhlajdhsdafds.jpg');
+	
+	# Link the profile with a medal, given by other user.
+	create table profile_badge(
+		fk_profile_id_owner int not null,
+		fk_profile_id_giver int not null,
+		fk_badge_id int not null,
+		date_geven date not null,
+		# Constrants
+		PRIMARY KEY (fk_badge_id, fk_profile_id_owner, fk_profile_id_giver),
+		FOREIGN KEY (fk_profile_id_owner) REFERENCES profile(profile_id),
+		FOREIGN KEY (fk_profile_id_giver) REFERENCES profile(profile_id)
+	);
+
+	insert into profile_badge values (666, 665, 02, STR_TO_DATE('23/03/2016', '%d/%m/%Y'));
+	insert into profile_badge values (665, 666, 01, STR_TO_DATE('23/03/2016', '%d/%m/%Y'));
