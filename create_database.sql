@@ -1,3 +1,14 @@
+/*
+	Tabela de banco de dados criada para a disciplina de DWE;
+
+	Grupo:
+	  Grupo: João Pedro Santos Vidiri; 
+	  Leticia Bruna; 
+	  Flávio Antonio da Silva; 
+	  Caio Martoni;
+*/
+
+#Drops
 drop table if exists aditional_email;
 drop table if exists adress;
 drop table if exists attachment;
