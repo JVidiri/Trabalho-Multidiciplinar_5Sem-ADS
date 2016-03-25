@@ -1,0 +1,18 @@
+Arquivo para apresentar a estrutura de pastas do projeto (será atualizado constantemente).
+=========================================================
+.
+├── akko - Pasta principal, separa o código dos aquivos de explicação do projeto.
+│   ├── img - Pasta pas as imagens do site, logo, user etc, haverá subpastas.
+│   ├── index.php - pagina inicial do site.
+│   ├── style - Pasta para os arquivos de estilo modificados para o site akko.
+│   │   └── akko.css
+│   └── template - Pasta com os templates padrão para utilizar no site.
+│       ├── form - Formulárioss que serão incluidos no projeto, cadastros entre outros.
+│       │   ├── form_createProfile.php
+│       │   └── form_createUser.php
+│       ├── header.php - header padrão, inclue todos os arquivos e variaveis globais.
+│       └── sql - Arquivos relevantes para o banco de dados, aqui estão a conexão e o script para a criação do banco de dados.
+│           ├── create_database.sql
+│           └── dbFacade.php
+├── estrutura.txt - Aquivo com a estrutura de pastas.
+└── README.md - Arquivo de apresentação do GitHub.

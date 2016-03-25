@@ -1,7 +1,9 @@
-<form method="post" action="caduser" enctype="multipart/form-data"> <!-- that must be secure, don't put the cad_... page in action or target! -->
+<!-- that must be secure, don't put the cad_... page in action or target! -->
+<form method="post" action="caduser" enctype="multipart/form-data">
 	<label>
 		<spam>Foto de perfil: </spam>
-		<input type="file" name="fileToUpload" id="fileToUpload"><!-- how to in: http://www.w3schools.com/php/php_file_upload.asp -->
+		<input type="file" name="profile_photo" />
+		<!-- how to in: http://www.w3schools.com/php/php_file_upload.asp -->
 	</label>
 	<label>
 		<spam>Nome completo: </spam>
@@ -10,16 +12,15 @@
 	</label>
 	<label>
 		<spam>Sobre: </spam>
-		<div id="textarea" contenteditable></div> 
-		<!-- make that div like: 
-			http://stackoverflow.com/questions/8956567/how-do-i-make-an-editable-div-look-like-a-text-field 
-		-->
+		<div class="textarea" contenteditable></div> 		
 		<strong><abbr title="required">*</abbr></strong>
 	</label>
 	<label>
 		<spam>Tipo de usuário: </spam>
-		<select name="user_type">			
-			<option></option> <!-- must be feled with the bank. -->
+		<select name="user_type">
+			<?php foreach($dbh->query('select `type_id`, `name`  from `profile_type`') as $line){ ?>
+			<option value="<?php echo $line['type_id']; ?>"><?php echo $line['name']; ?></option>			
+			<?php } ?>
 		</select>
 		<strong><abbr title="required">*</abbr></strong>
 	</label>
