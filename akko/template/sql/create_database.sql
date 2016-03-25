@@ -27,6 +27,7 @@ drop table if exists profile_user_site;
 drop table if exists profile_badge;
 drop table if exists published_work;
 drop table if exists profile;
+drop table if exists profile_type;
 drop table if exists user_site;
 drop table if exists user;
 drop table if exists idiom;
@@ -49,24 +50,37 @@ create table user(
 insert into user values (665,'João', 'joao.vidiri@gmail.com', 'hash', 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', 'hash', 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
 
+/*Types of profiles that could be created. */
+create table profile_type(
+	type_id int auto_increment,
+	name varchar(64) not null,
+	description varchar(255),
+	#Constrants
+ 	PRIMARY KEY (type_id)
+);
+
+insert into profile_type values (01, 'Usuário', 'Perfil pessoal.');
+insert into profile_type values (02, 'Instituição', 'Perfil para empresas, Instituições, Escolas, Faculdades e etc...');
+
 /* User profile basics, must be completed with the other data from the other tables */
 create table profile(
 	profile_id int auto_increment,
 	fk_user_id int not null, #fk to user_akko
+	fk_profile_type_id int not null,
 	complete_name varchar(255) not null,
-	about varchar(500) not null,
-	type int not null, # 0 for user 1 for institution.
+	about varchar(500) not null,	
 	birth date not null,
 	alias varchar(64),
 	curriculum varchar(512), #we will encorage the user to stre this in other local and put a link here.	
 	#Constrants
 	PRIMARY KEY (profile_id),
-	FOREIGN KEY (fk_user_id) REFERENCES user(user_id)
+	FOREIGN KEY (fk_user_id) REFERENCES user(user_id),
+	FOREIGN KEY (fk_profile_type_id) REFERENCES profile_type(type_id)
 );
 
-insert into profile values (665, 665, 'João Pedro Santos Vidiri','A great programmer! And a kindfull Dog owner...',1,
+insert into profile values (665, 665, 01, 'João Pedro Santos Vidiri','A great programmer! And a kindfull Dog owner...',
 	STR_TO_DATE('03/07/1995', '%d/%m/%Y'), 'jvidiri', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
-insert into profile values (666, 666, 'Leticia Bruna','Queen of the hell...',1,
+insert into profile values (666, 666, 02, 'Leticia Bruna','Queen of the hell...',
 	STR_TO_DATE('21/05/1993', '%d/%m/%Y'), 'lbruna', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
 
     /* Store countries */
@@ -354,14 +368,14 @@ create table badge(
 );
 
 insert into badge values(01, 'Informatica', 'SQL Junior', 'This user knows the basics of SQL and have some practical experience with it.','/img/medals/askjdfhlajdhfjas.jpg');
-insert into badge values(02, 'Hell\'s', 'HR of hell', 'This User makes the Human resources os Hell.','img/medals/askjdfhlajdhsdafds.jpg');
+insert into badge values(02, 'Hell', 'HR of hell', 'This User makes the Human resources os Hell.','img/medals/askjdfhlajdhsdafds.jpg');
 	
 	# Link the profile with a medal, given by other user.
 	create table profile_badge(
 		fk_profile_id_owner int not null,
 		fk_profile_id_giver int not null,
 		fk_badge_id int not null,
-		date_geven date not null,
+		date_given date not null,
 		# Constrants
 		PRIMARY KEY (fk_badge_id, fk_profile_id_owner, fk_profile_id_giver),
 		FOREIGN KEY (fk_profile_id_owner) REFERENCES profile(profile_id),
