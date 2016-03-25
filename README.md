@@ -1,4 +1,4 @@
-# trabalho Multidiciplinar
+# Trabalho Multidiciplinar
 Repósitório para as enregas do trabalho Interdiciplinas. 
 
 --- Nome do projeto---
