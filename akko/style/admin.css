@@ -1,0 +1,17 @@
+.header{
+		
+}
+
+.leftMenu{
+	width: 30%;
+	float: left;
+}
+
+.contentAdmin{
+	width: 70%;
+	float: left;
+}
+
+.form-group{
+	width: 50%;
+}

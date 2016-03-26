@@ -43,12 +43,13 @@ create table user(
  	pass_hash char(64) not null, /* Not store the password without hashing */
  	is_confirmed bit not null, /* 0 if email is not confirmed 1 for email confirmed */
  	created date not null, 
+ 	last_login date not null,
  	#Constrants
  	PRIMARY KEY (user_id)
 );
 
-insert into user values (665,'João', 'joao.vidiri@gmail.com', 'hash', 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
-insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', 'hash', 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
+insert into user values (665,'João', 'joao.vidiri@gmail.com', 'hash', 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', 'hash', 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 
 /*Types of profiles that could be created. */
 create table profile_type(
@@ -80,7 +81,7 @@ create table profile(
 
 insert into profile values (665, 665, 01, 'João Pedro Santos Vidiri','A great programmer! And a kindfull Dog owner...',
 	STR_TO_DATE('03/07/1995', '%d/%m/%Y'), 'jvidiri', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
-insert into profile values (666, 666, 02, 'Leticia Bruna','Queen of the hell...',
+insert into profile values (666, 666, 01, 'Leticia Bruna','Queen of the hell...',
 	STR_TO_DATE('21/05/1993', '%d/%m/%Y'), 'lbruna', 'https://docs.google.com/document/d/1WSusDwTLLy1lNaCWbFiDJAJFDPnbj7bGIWlRubIL5Y8/edit?usp=sharing');
 
     /* Store countries */
@@ -113,7 +114,7 @@ insert into profile values (666, 666, 02, 'Leticia Bruna','Queen of the hell...'
 	create table city(
 		city_id int auto_increment,
 		name varchar(64) not null,
-		fk_government_district int not null,#fk for the government district A.K.A. 
+		fk_government_district int not null,#fk for the government district A.K.A. state.
 		#constrants
 		PRIMARY KEY (city_id),
 		FOREIGN KEY (fk_government_district) REFERENCES government_district(government_district_id)
@@ -125,18 +126,17 @@ insert into profile values (666, 666, 02, 'Leticia Bruna','Queen of the hell...'
 
 	/*  Adress with city, state and country, that is only to find people near you,
 	    Other data is unnessessary to store in our database, 
-	   and must be in the user curriculum or portifolio */
-	create table adress(
-		adress_id int auto_increment,
-		fk_profile_id int not null, #fk for profile,
+	   and must be in the user curriculum, portifolio or institutional site. */
+	create table adress(		
+		fk_profile_id int not null, #fk for profile
 		fk_city_id int not null,#fk depending on government district
 		#constrants
-		PRIMARY KEY (adress_id),
+		PRIMARY KEY (fk_profile_id, fk_city_id),
 		FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id),
 		FOREIGN KEY (fk_city_id) REFERENCES city(city_id)
 	);
 
-	insert into adress values (01, 666, 01);
+	insert into adress values (666, 01);
 
 	/* This table must store the grade informations based on country */
 	create table grade(
@@ -356,19 +356,30 @@ create table contact(
 
 insert into contact values (665,666, 0, STR_TO_DATE('22/03/2016', '%d/%m/%Y'));
 
+create table badge_type(
+	type_id int auto_increment,
+	name varchar(64),
+	# Constrants
+	PRIMARY KEY (type_id)
+);
+
+insert into badge_type values (01, 'Informática');
+insert into badge_type values (02, 'Hells');
+
 # medals will be created by the internal team.
 create table badge(
 	badge_id int not null,
-	type varchar(64) not null,
+	fk_type_id int not null,
 	title varchar(64) not null,
 	description varchar(511),
 	thumb varchar(255) not null,
 	# Constrants
-	PRIMARY KEY (badge_id)
+	PRIMARY KEY (badge_id),
+	FOREIGN KEY (fk_type_id) REFERENCES badge_type(type_id)
 );
 
-insert into badge values(01, 'Informatica', 'SQL Junior', 'This user knows the basics of SQL and have some practical experience with it.','/img/medals/askjdfhlajdhfjas.jpg');
-insert into badge values(02, 'Hell', 'HR of hell', 'This User makes the Human resources os Hell.','img/medals/askjdfhlajdhsdafds.jpg');
+insert into badge values(01, 01, 'SQL Junior', 'This user knows the basics of SQL and have some practical experience with it.','/img/medals/askjdfhlajdhfjas.jpg');
+insert into badge values(02, 02, 'HR of hell', 'This User makes the Human resources os Hell.','img/medals/askjdfhlajdhsdafds.jpg');
 	
 	# Link the profile with a medal, given by other user.
 	create table profile_badge(

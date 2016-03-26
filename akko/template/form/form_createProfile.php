@@ -39,5 +39,13 @@
 		<input type="url" name="curriculum" required />
 		<strong><abbr title="required">*</abbr></strong>
 	</label>
-	<input type="submit" value="Registrar-se" />
+	<!-- TODO Add a option to add a adress, like in https://developers.google.com/places/javascript/ search for "place autocomplete".-->
+	<!-- TODO Let the user add zero or more grades. -->
+	<!-- TODO Let the user add zero or more experiences. -->
+	<!-- TODO Let the user add zero or more sites. -->
+	<!-- TODO Let the user add zero or more published works. -->
+	<!-- TODO Let the user add zero or more idioms. -->
+	<!-- TODO Let the user add zero or more phones. -->
+	<!-- TODO Let the user add zero or more aditional emails -->
+	<input type="submit" value="Salvar" />
 </form>

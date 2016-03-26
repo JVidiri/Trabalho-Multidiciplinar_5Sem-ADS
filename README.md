@@ -19,6 +19,7 @@ AKKO
 * Planilha checklist;
 * Trello;
 * Open Project;
+* Google Drive para troca de arquivos;
 
 Grupo:
   João Pedro Santos Vidiri;
