@@ -1,3 +1,4 @@
+<?php require_once('template/accessControl.php');?>
 <html>
 <head>
 	<title>AKKO</title>	
@@ -7,7 +8,7 @@
 	</div>
 	<div>
 	<div class="content">
-		<h3>Site under contruction...</h3>
+		<h3>Hello <?php echo $username ?>Site under contruction...</h3>
 	</div>
 	<div class="botton">
 	</div>
