@@ -34,22 +34,23 @@ drop table if exists idiom;
 drop table if exists grade;
 drop table if exists experience;
 drop table if exists country;
+drop table if exists badge_type;
 
 /* User data */
 create table user(
  	user_id int auto_increment,
  	name varchar(255) not null,
- 	email varchar(255) not null,
+ 	mail varchar(255) not null,
  	pass_hash char(64) not null, /* Not store the password without hashing */
  	is_confirmed bit not null, /* 0 if email is not confirmed 1 for email confirmed */
  	created date not null, 
- 	last_login date not null,
+ 	last_login date,
  	#Constrants
  	PRIMARY KEY (user_id)
 );
 
-insert into user values (665,'João', 'joao.vidiri@gmail.com', 'hash', 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
-insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', 'hash', 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (665,'João', 'joao.vidiri@gmail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 
 /*Types of profiles that could be created. */
 create table profile_type(

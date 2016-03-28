@@ -13,10 +13,20 @@
 class user{
 	public $user_id;
 	public $name;
-	public $email;
-	public $pass_hash;
+	public $mail;
+    public $password;
 	public $is_confirmed;
 	public $created;
 	public $last_login;
+
+    public function __construct($user_id, $name, $mail, $password, $is_confirmed, $created, $last_login){
+        $this->user_id = $user_id;
+        $this->name = $name;
+        $this->mail = $mail;
+        $this->password = $password;
+        $this->is_confirmed = $is_confirmed;
+        $this->created = $created;
+        $this->last_login = $last_login;
+    }
 }
 ?>

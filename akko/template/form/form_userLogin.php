@@ -1,4 +1,4 @@
-<form role="form" method="post" action="<?php $submitAction ?>"> <!-- that must be secure, don't put the cad_... page here! -->	
+<form role="form" method="post" action="<?php echo $submitAction ?>"> <!-- that must be secure, don't put the cad_... page here! -->	
 	<label class="form-group">
 		<spam>E-mail: </spam>
 		<input type="text" class="form-control" name="mail" required />			

@@ -1,12 +1,7 @@
 <?php 
 	require_once('../template/sql/dbFacade.php');	
-?>
-<html>
-<head>
-	<?php require_once('../template/head.php'); ?>
-	<link rel="stylesheet" type="text/css" href="../style/admin.css">
-	<title>Akko Admin</title>	
-</head>
+	require_once('head.php'); 
+?>	
 <body>
 	<div class="header">
 		<h1>Akko Admin</h1>

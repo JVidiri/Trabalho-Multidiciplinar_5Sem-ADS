@@ -1,6 +1,25 @@
 /* 
 	Main Style file, all the site css must be here.
 */
+/* admin*/
+.header{
+        
+}
+
+.leftMenu{
+    width: 30%;
+    float: left;
+}
+
+.contentAdmin{
+    width: 70%;
+    float: left;
+}
+
+.form-group{
+    width: 50%;
+}
+
 /* Main (Generic style)*/
 
 /* === Content (Central div) === */
@@ -17,6 +36,9 @@
     width: 400px;
 }
 
+.error{
+    color: red;
+}
 /* === Site header (main menu) === */
 
 /* === Site bar (botton menu menu) === */
