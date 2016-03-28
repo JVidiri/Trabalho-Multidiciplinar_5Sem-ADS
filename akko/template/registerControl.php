@@ -21,7 +21,7 @@ if ( isset($_POST['mail']) && isset($_POST['name']) &&
 	if ($password == $password_confirm){		
 		$date = (new DateTime())->Format('Y-m-d H:i:s');
 		$newUser = new user(NULL, $name, $mail, $password, 0, $date, NULL);
-
+		echo $newUser->is_confirmed;
 		$userHandler = new userHandler();
 		$userHandler->insert($newUser);
 	}

@@ -35,6 +35,7 @@ drop table if exists grade;
 drop table if exists experience;
 drop table if exists country;
 drop table if exists badge_type;
+drop event if exists evt_delete_inactive_user;
 
 /* User data */
 create table user(
@@ -42,15 +43,16 @@ create table user(
  	name varchar(255) not null,
  	mail varchar(255) not null,
  	pass_hash char(64) not null, /* Not store the password without hashing */
- 	is_confirmed bit not null, /* 0 if email is not confirmed 1 for email confirmed */
+ 	is_confirmed tinyint(1) not null, /* 0 if email is not confirmed 1 for email confirmed */
  	created date not null, 
  	last_login date,
  	#Constrants
  	PRIMARY KEY (user_id)
 );
 
-insert into user values (665,'João', 'joao.vidiri@gmail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
-insert into user values (666,'Leticia', 'leticia.bruna.cpq@gmail.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (665,'João', 'jovidiri@mail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
+insert into user values (666,'Leticia', 'leticc@outlook.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('29/03/2016', '%d/%m/%Y'));
+insert into user values (667,'Martoni', 'tony@mail.com', PASSWORD('martoni12365'), 0,  STR_TO_DATE('28/03/2016', '%d/%m/%Y'), STR_TO_DATE('29/03/2016', '%d/%m/%Y'));
 
 /*Types of profiles that could be created. */
 create table profile_type(
@@ -300,7 +302,7 @@ insert into profile values (666, 666, 01, 'Leticia Bruna','Queen of the hell...'
 		FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id)
 	);
 
-	insert into phone values (01, '(19) 981254405', 55, 666);
+	insert into phone values (01, '(19) 925009388', 55, 666);
 
 	create table aditional_email(
 		email_id int auto_increment,
@@ -347,7 +349,7 @@ create table contact(
 	fk_profile_id int not null,
 	fk_profile_id_contact int not null,
 	# type int not null,
-	is_accepted bit not null, # If the contact accepted the friendship
+	is_accepted tinyint(1) not null, # If the contact accepted the friendship
 	accepted_date date,
 	# Constrants
 	PRIMARY KEY (fk_profile_id, fk_profile_id_contact),
@@ -396,3 +398,12 @@ insert into badge values(02, 02, 'HR of hell', 'This User makes the Human resour
 
 	insert into profile_badge values (666, 665, 02, STR_TO_DATE('23/03/2016', '%d/%m/%Y'));
 	insert into profile_badge values (665, 666, 01, STR_TO_DATE('23/03/2016', '%d/%m/%Y'));
+
+/*
+	Event to delete user who don't confirm email, will run every two days.
+*/
+CREATE EVENT evt_delete_inactive_user
+	ON SCHEDULE EVERY 2 DAY
+	STARTS '2016-3-28 00:00:00'
+DO
+  	DELETE FROM user Where is_confirmed = 0;

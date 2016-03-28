@@ -17,12 +17,12 @@ class userHandler extends dbFacade implements dbInterface{
                                             `user`(`name`, `mail`, `pass_hash`, `is_confirmed`, `created`, `last_login`) 
                                             VALUES (:name,:mail,PASSWORD(:password),:is_confirmed, :created, NULL)");
 
-            $params = array(':name' => $toAdd->name,
-                            ':mail' => $toAdd->mail, 
-                            ':password' => $toAdd->password,
-                            ':is_confirmed' => $toAdd->is_confirmed,
-                            ':created' => $toAdd->created);
-            $ret = $stmt->execute($params);
+            $stmt->bindValue(':name', $toAdd->name);
+            $stmt->bindValue(':mail', $toAdd->mail);
+            $stmt->bindValue(':password', $toAdd->password);
+            $stmt->bindValue(':is_confirmed', $toAdd->is_confirmed, PDO::PARAM_INT);
+            $stmt->bindValue(':created', $toAdd->created);
+            $ret = $stmt->execute();
             return $ret;
         }else{
             //return error;
