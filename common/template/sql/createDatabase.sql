@@ -36,6 +36,7 @@ drop table if exists experience;
 drop table if exists country;
 drop table if exists badge_type;
 drop event if exists evt_delete_inactive_user;
+drop function IF EXISTS update_user_last_login;
 
 /* User data */
 create table user(
@@ -49,6 +50,11 @@ create table user(
  	#Constrants
  	PRIMARY KEY (user_id)
 );
+
+create function update_user_last_login(user_id int)
+begin
+	update 'user' set ('last_login' = STR_TO_DATE(curdate(), '%Y-%m-%d'));
+end;
 
 insert into user values (665,'João', 'jovidiri@mail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 insert into user values (666,'Leticia', 'leticc@outlook.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('29/03/2016', '%d/%m/%Y'));

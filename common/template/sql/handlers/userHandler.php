@@ -27,22 +27,41 @@ class userHandler extends dbFacade implements dbInterface{
         }else{
             //return error;
         }
-    }    
+    }  
+
     public function delete($toDelete){
-        //TODO
+        if(!self::$dbHandler) {
+            $this->connect();
+        }
+        $stmt = self::$dbHandler->prepare("DELETE FROM `user` where `user_id` = :toDelete");
+        $stmt->bindValue(':toDelete', $toDelete);
+        $ret = $stmt->execute();
+        return $ret;
     }
-    public function update($template){
-        //TODO
+
+    public function update($toUpdate){
+        if(!self::$dbHandler) {
+            $this->connect();
+        }
+        $stmt = self::$dbHandler->prepare("UPDATE `user` 
+                                        SET(`name` = :name , `mail` = :mail, `pass_hash` = PASSWORD(:password)) 
+                                        WHERE `user_id` = :user_id ");
+
+        $stmt->bindValue(':user_id', $toAdd->user_id);
+        $stmt->bindValue(':name', $toAdd->name);
+        $stmt->bindValue(':mail', $toAdd->mail);
+        $stmt->bindValue(':password', $toAdd->password);        
+        $ret = $stmt->execute();
     }
+
     public function select($lastUser){
         if(!self::$dbHandler) {
             $this->connect();
         }
         $stmt = self::$dbHandler->prepare("SELECT * from `user` where `user_id` > :last_user ORDER BY `user_id` limit 25");
-        $stmt->bindValue(':name', $toAdd->name);
-
-        $ret = $stmt->execute();
-        return $ret;
+        $stmt->bindValue(':last_user', $lastUser);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function verifyByMailAndPassword($mail, $password){

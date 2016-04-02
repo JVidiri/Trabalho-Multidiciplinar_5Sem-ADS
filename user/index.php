@@ -1,4 +1,4 @@
-<?php require_once('head.php');?>
+<?php require_once(ROOT_PATH.'head.php');?>
 <?php require_once('template/accessControl.php');?>
 <body>
 	<div class="header">
