@@ -34,8 +34,15 @@ class userHandler extends dbFacade implements dbInterface{
     public function update($template){
         //TODO
     }
-    public function select($template){
-        //TODO
+    public function select($lastUser){
+        if(!self::$dbHandler) {
+            $this->connect();
+        }
+        $stmt = self::$dbHandler->prepare("SELECT * from `user` where `user_id` > :last_user ORDER BY `user_id` limit 25");
+        $stmt->bindValue(':name', $toAdd->name);
+
+        $ret = $stmt->execute();
+        return $ret;
     }
 
     public function verifyByMailAndPassword($mail, $password){
