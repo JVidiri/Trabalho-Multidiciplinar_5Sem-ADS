@@ -13,7 +13,8 @@ session_start();
 if (isset($_GET['logoff'])){
 	unset($_SESSION['mail']);
 	unset($_SESSION['password']);
-	echo "Vlw, flw!";
+	$errorMessage = 'Usuário fez logoff.';
+	include_once($absolutPath . '/login.php');
 	exit;
 }
 
@@ -21,15 +22,23 @@ if (isset($_GET['logoff'])){
 	Verify if the user information is already in _SESSION 
 	or is a new request in _POST var yet.
 */
-$mail = isset($_POST["mail"]) ? $_POST["mail"] : $_SESSION["mail"];
-$password = isset($_POST['password']) ? $_POST['password'] : $_SESSION['password'];
+if ( isset($_POST["mail"]) ){
+	$mail = $_POST["mail"];
+}else if ( isset($_SESSION["mail"]) ){
+	$mail =	 $_SESSION["mail"];	
+}
+
+if ( isset($_POST["password"]) ){
+	$password = $_POST["password"];
+}else if ( isset($_SESSION["password"]) ){
+	$password =	 $_SESSION["password"];
+}
 
 /* If is not set the user don't login yet. */
-if(!isset($mail)) {
+if( (!isset($mail)) || (!isset($password))) {
 	//Show The login form here.
-	echo "<p>Acesso apenas para usuários cadastrados faça login ou cadastre-se</p>";
+	$errorMessage = 'Acesso apenas para usuários cadastrados faça login ou cadastre-se';
 	include_once($absolutPath . '/login.php');
-	echo "<a href=\"register.php\" class=\"btn btn-default\" >Registrar-se</a>";
 	exit;
 }
 
@@ -45,8 +54,9 @@ $result = $userHandler->verifyByMailAndPassword($mail, $password);
 if ($result == NULL){
 	unset($_SESSION['mail']);
 	unset($_SESSION['password']);
-	echo '<p class="error">Usuário e senha incorretos, <a href="register.php">cadastre-se!</a></p>';	
-	exit;
+	$errorMessage = 'Usuário e senha incorretos, <a href="register.php">cadastre-se!</a>';
+	include_once($absolutPath . '/login.php');
+	exit;		
 }else{
 	$username = $result->name;
 }

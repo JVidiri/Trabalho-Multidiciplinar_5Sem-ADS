@@ -3,8 +3,8 @@
 <body>
 	<div class="header">
 	</div>
-	<div>
-	<div class="content">
+	<div>	
+	<div class="content">		
 		<h3>Hello <?php echo $username ?> <br />Site under contruction...</h3>
 	</div>
 	<div class="content">

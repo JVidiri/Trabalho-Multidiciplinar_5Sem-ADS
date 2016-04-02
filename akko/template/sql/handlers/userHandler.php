@@ -49,7 +49,8 @@ class userHandler extends dbFacade implements dbInterface{
         $stmt->bindParam(':mail', $mail);
         $stmt->bindParam(':password', $password);  
         $stmt->execute();
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);        
+        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = NULL;   
         if ($userData) {            
             $user = new user($userData['user_id'],
                                 $userData['name'],
