@@ -30,13 +30,15 @@ drop table if exists profile;
 drop table if exists profile_type;
 drop table if exists user_site;
 drop table if exists user;
+drop table if exists idiom_level;
 drop table if exists idiom;
 drop table if exists grade;
 drop table if exists experience;
 drop table if exists country;
 drop table if exists badge_type;
 drop event if exists evt_delete_inactive_user;
-drop function IF EXISTS update_user_last_login;
+drop procedure if exists update_user_last_login;
+drop procedure if exists update_user_is_confirmed;
 
 /* User data */
 create table user(
@@ -51,10 +53,11 @@ create table user(
  	PRIMARY KEY (user_id)
 );
 
-create function update_user_last_login(user_id int)
-begin
-	update 'user' set ('last_login' = STR_TO_DATE(curdate(), '%Y-%m-%d'));
-end;
+create procedure update_user_last_login(useId int)
+	update user set last_login = STR_TO_DATE(curdate(), '%Y-%m-%d') where `user`.`user_id` = useId;
+
+create procedure update_user_is_confirmed(useId int, isConfirmed int)
+	update user set is_confirmed = isConfirmed where `user`.`user_id` = useId;
 
 insert into user values (665,'João', 'jovidiri@mail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 insert into user values (666,'Leticia', 'leticc@outlook.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('29/03/2016', '%d/%m/%Y'));
@@ -259,7 +262,7 @@ insert into profile values (666, 666, 01, 'Leticia Bruna','Queen of the hell...'
 		profile_photo_id int auto_increment,
 		fk_profile_id int not null, #fk for profile,
 		photo_path varchar(255) not null,
-		update_date date not null, # when it entered the sistem,
+		update_date date not null, # when it entered the system,
 		#Constrants
 		PRIMARY KEY (profile_photo_id),
 		FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id)
@@ -268,6 +271,19 @@ insert into profile values (666, 666, 01, 'Leticia Bruna','Queen of the hell...'
 	insert into profile_photo values (01, 666, 
 										'img/users/192387178432204823.png', 
 										STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
+
+	create table idiom_level(
+		idiom_level_id int auto_increment,
+		name varchar(64),
+		description varchar(255),
+		#Constrants
+		PRIMARY KEY (idiom_level_id)
+	);
+
+	insert into idiom_level values (01, 'Fluênte', 'Domina a lingua como um nativo.');
+	insert into idiom_level values (02, 'Avançado', 'Domina a lingua para manter conversações, escrever e ler sem grandes dificuldades.');
+	insert into idiom_level values (03, 'Médio', 'Domina a lingua para leitura, escrita e conversação com dificuldades.');	
+	insert into idiom_level values (04, 'Básico', 'Não domina a lingua bem, mas tem conhecimento em algumas palavras ou frases.');	
 
 	/* Table to store user idioms */
 	create table idiom(
@@ -281,21 +297,20 @@ insert into profile values (666, 666, 01, 'Leticia Bruna','Queen of the hell...'
 
 	insert into idiom values (01, 'Português', 55);
 
+
 		/* Link the user with the idiom */
 		create table profile_idiom(
 			fk_profile_id int not null,# fk for profile_akko
 		    fk_idiom_id int not null,# fk idiom
-		    idiom_level int not null,# 1 for Fluent, 
-		    						 # 2 for Advanced, 
-		    						 # 3 for Medium,
-		    						 # 4 for User do not know the idiom
+		    fk_idiom_level_id int not null,# fk idiom_level
 		    #Constrants
 			PRIMARY KEY (fk_idiom_id, fk_profile_id),
 			FOREIGN KEY (fk_profile_id) REFERENCES profile(profile_id),
-			FOREIGN KEY (fk_idiom_id) REFERENCES idiom(idiom_id)
+			FOREIGN KEY (fk_idiom_id) REFERENCES idiom(idiom_id),
+			FOREIGN KEY (fk_idiom_level_id) REFERENCES idiom_level(idiom_level_id)
 		);
 
-		insert into profile_idiom values (666, 01, 1);
+		insert into profile_idiom values (666, 1, 1);
 
 	/* Profile contacts info */
 	create table phone(

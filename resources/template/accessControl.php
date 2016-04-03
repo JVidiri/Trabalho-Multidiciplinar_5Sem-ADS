@@ -5,8 +5,9 @@
   This file just handle logged user and redirects the user to
 the login page if it is not logged.
 */
-require_once($absolutPath . '/template/sql/dbFacade.php');
-require_once($absolutPath . '/template/sql/handlers/userHandler.php');
+require_once(dirname(__FILE__) . '/template/sql/dbFacade.php');
+require_once(dirname(__FILE__) . '/template/sql/dbFacade.php');
+require_once(dirname(__FILE__) . '/template/sql/handlers/userHandler.php');
 
 /* Start a php session handler. */
 session_start();
@@ -14,7 +15,7 @@ if (isset($_GET['logoff'])){
 	unset($_SESSION['mail']);
 	unset($_SESSION['password']);
 	$errorMessage = 'Usuário fez logoff.';
-	include_once($absolutPath . '/login.php');
+	include_once(dirname(__FILE__) . '/login.php');
 	exit;
 }
 
@@ -38,7 +39,7 @@ if ( isset($_POST["password"]) ){
 if( (!isset($mail)) || (!isset($password))) {
 	//Show The login form here.
 	$errorMessage = 'Acesso apenas para usuários cadastrados faça login ou cadastre-se';
-	include_once($absolutPath . '/login.php');
+	include_once(dirname(__FILE__) . '/user/login.php');
 	exit;
 }
 
@@ -55,7 +56,7 @@ if ($result == NULL){
 	unset($_SESSION['mail']);
 	unset($_SESSION['password']);
 	$errorMessage = 'Usuário e senha incorretos, <a href="register.php">cadastre-se!</a>';
-	include_once($absolutPath . '/login.php');
+	include_once(dirname(__FILE__) . '/user/login.php');
 	exit;		
 }else{
 	$username = $result->name;
