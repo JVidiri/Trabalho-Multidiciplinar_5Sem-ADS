@@ -1,4 +1,3 @@
-<?php 
-	define('ROOT_PATH', dirname(__DIR__) . '/');
-	//echo ROOT_PATH;
+<?php 	
+	$rootPath = $_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS';
 ?>

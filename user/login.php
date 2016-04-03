@@ -1,15 +1,16 @@
 <?php require_once('head.php'); ?>
+<?php require_once($rootPath.'/resources/accessControl.php'); ?>
 <body>
 	<div class="error">
 		<p>
-			<?php if (isset($errorMessage))
-				echo $errorMessage;
+			<?php if (isset($accessErrorMessage))
+				echo $accessErrorMessage;
 			?>
 		</p>
 	</div>
 	<?php		
 		$submitAction = '#';
-		include('template/form/form_userLogin.php');
+		include($rootPath. '/resources/template/form/userLogin.php');
 	?>	
 </body>
 </html>

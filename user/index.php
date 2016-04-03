@@ -1,6 +1,16 @@
-<?php require_once(ROOT_PATH.'head.php');?>
-<?php require_once('template/accessControl.php');?>
+<?php require_once('head.php');?>
+<?php require_once($rootPath.'/resources/accessControl.php');?>
 <body>
+	<div class="error">
+		<p>
+			<?php 
+				if (isset($accessErrorMessage)){
+					echo $accessErrorMessage;
+					exit;
+				}
+			?>
+		</p>
+	</div>
 	<div class="header">
 	</div>
 	<div>	

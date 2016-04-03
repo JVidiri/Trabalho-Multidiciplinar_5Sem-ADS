@@ -1,6 +1,6 @@
-<?php
-	require_once('head.php');	
-	require_once(ROOT_PATH.'resources/template/sql/dbFacade.php');
+<?php	
+	require_once('head.php');
+	require_once($rootPath . '/resources/template/sql/dbFacade.php');
 ?>	
 <body>
 	<div class="header">
@@ -9,7 +9,7 @@
 	</div>
 	<div class="leftMenu">
 		<ul>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?offset=0');" target="#content">User</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?lastuser=0');" target="#content">User</a></li>
 			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createBadge.php');" target="#content">Badges</a></li>
 			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createCountry.php');" target="#content">Country</a></li>
 			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createGovernmentDistrict.php');" target="#content">Government District</a></li>

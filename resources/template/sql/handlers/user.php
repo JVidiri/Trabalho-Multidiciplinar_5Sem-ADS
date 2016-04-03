@@ -2,9 +2,10 @@
 /*
     Class to work with the user in database.
 */
-include_once(dirname(__FILE__) . '/../dbFacade.php');
-include_once(dirname(__FILE__) . '/../dbInterface.php');
-include_once(dirname(__FILE__) . '/../types/user.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
+require_once($rootPath . '/resources/template/sql/dbFacade.php');
+require_once($rootPath . '/resources/template/sql/dbInterface.php');
+require_once($rootPath . '/resources/template/sql/types/user.php');
 
 class userHandler extends dbFacade implements dbInterface{
 
@@ -109,6 +110,16 @@ class userHandler extends dbFacade implements dbInterface{
         $stmt = self::$dbHandler->prepare("call update_user_is_confirmed(:user_id, :is_confirmed)");
         $stmt->bindValue(':user_id', $userId);
         $stmt->bindValue(':is_confirmed', $confirmed);
+        $ret = $stmt->execute();
+        return $ret;
+    }
+
+    public function updateLastLogin($userId){
+        if(!self::$dbHandler) {
+            $this->connect();
+        }
+        $stmt = self::$dbHandler->prepare("call update_user_last_login(:user_id)");
+        $stmt->bindValue(':user_id', $userId);
         $ret = $stmt->execute();
         return $ret;
     }
