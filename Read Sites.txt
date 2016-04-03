@@ -1,4 +1,4 @@
-Things i'm reading:
+Things we are reading:
   https://www.theukwebdesigncompany.com/articles/advanced-html-forms.php
   http://stackoverflow.com/questions/14853779/adding-input-elements-dynamically-to-form
   http://www.sitepoint.com/users-php-sessions-mysql/
@@ -6,3 +6,4 @@ Things i'm reading:
   https://phpbestpractices.org/
   http://stackoverflow.com/questions/12120433/php-mysql-insert-date-format
   http://stackoverflow.com/questions/1699796/best-way-to-do-multiple-constructors-in-php
+  http://yagudaev.com/posts/resolving-php-relative-path-problem/

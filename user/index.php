@@ -18,7 +18,7 @@
 		<h3>Hello <?php echo $username ?> <br />Site under contruction...</h3>
 	</div>
 	<div class="content">
-		<p><a href="?logoff=1">Sair</a></p>
+		<p><a href="login.php?logoff=1">Sair</a></p>
 	</div>
 	<div class="botton">
 	</div>

@@ -1,22 +1,34 @@
 <?php	
 	require_once('head.php');
 	require_once($rootPath . '/resources/template/sql/dbFacade.php');
+	require_once($rootPath . '/resources/adminAccessControl.php');
 ?>	
 <body>
+	<div class="error">
+		<p>
+			<?php 
+				if (isset($accessErrorMessage)){
+					echo $accessErrorMessage;
+					exit;
+				}
+			?>
+		</p>
+	</div>
 	<div class="header">
-		<h1>Akko Admin</h1>
-		<!--TODO add a sessions as soon it is working -->
+		<h1>Akko Admin</h1>		
 	</div>
 	<div class="leftMenu">
 		<ul>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?lastuser=0');" target="#content">User</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createBadge.php');" target="#content">Badges</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createCountry.php');" target="#content">Country</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createGovernmentDistrict.php');" target="#content">Government District</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createGrade.php');" target="#content">Grade</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createIdiom.php');" target="#content">Idiom</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createProfile.php');" target="#content">Profile</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/form_createProfileType.php');" target="#content">Profile Type</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0');" target="#content">Usuário admin</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/users.php?lastElement=0');" target="#content">Usuário comum</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badges.php?lastElement=0');" target="#content">Medalhas</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0');" target="#content">País</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/governmentDistrict.php?lastElement=0');" target="#content">Distrito governamental</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/city.php?lastElement=0');" target="#content">Cidade</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/grade.php?lastElement=0');" target="#content">Grau de escolaridade</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiom.php?lastElement=0');" target="#content">Idioma</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiomLevel.php?lastElement=0');" target="#content">Niveis de idioma</a></li>
+			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/profileType.php?lastElement=0');" target="#content">Tipos de perfil</a></li>
 		</ul>
 	</div>
 	<div class="contentAdmin" id="content">

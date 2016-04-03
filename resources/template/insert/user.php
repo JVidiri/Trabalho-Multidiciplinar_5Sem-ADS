@@ -1,13 +1,10 @@
 <?php
 /* 
-  Access control functions.
-
-  This file just handle logged user and redirects the user to
-the login page if it is not logged.
+  Insert a new user in the database
 */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
-require_once($rootPath . '/resources/template/sql/handlers/user.php');
+require_once($rootPath . '/resources/template/handler/user.php');
 
 /*
 	Verify if the user information is in _POST var.

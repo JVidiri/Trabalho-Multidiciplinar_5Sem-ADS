@@ -1,45 +1,103 @@
 Arquivo para apresentar a estrutura de pastas do projeto (será atualizado constantemente).
 =========================================================
 .
-├── akko - Pasta principal, separa o código dos aquivos de explicação do projeto.
-│   ├── admin - admin, para controle.
-│   │   ├── head.php
-│   │   └── index.php
-│   ├── head.php - header padrão, inclue todos os arquivos e variaveis globais, além do html basico da página.
-│   ├── img - Pasta pas as imagens do site, logo, user etc, haverá subpastas.
-│   │   ├── akko-logo-beta.png
-│   │   ├── akko-logo-min.png
-│   │   └── akko-logo.png
-│   ├── index.php - Página inicial do site.
-│   ├── login.php - Página de Login.
-│   ├── register.php - página de registro.
-│   ├── style - Pasta para os arquivos de estilo modificados para o site akko.
-│   │   ├── admin.css
-│   │   └── akko.css
-│   └── template - Pasta com os templates padrão para utilizar no site.
-│       ├── accessControl.php - Arquivo para controle de acesso, incluir em páginas que requerem login
-│       ├── form - Formulárioss que serão incluidos no projeto, cadastros entre outros.
-│       │   ├── form_createBadge.php
-│       │   ├── form_createCountry.php
-│       │   ├── form_createGovernmentDristrict.php
-│       │   ├── form_createGrade.php
-│       │   ├── form_createIdiom.php
-│       │   ├── form_createProfile.php
-│       │   ├── form_createProfileType.php
-│       │   ├── form_userLogin.php
-│       │   └── form_userRegister.php
-│       ├── registerControl.php - Arquivo para controle de registro do usuário.
-│       ├── script - Javascripts do site.
-│       │   ├── common.js
-│       │   └── form.js
-│       └── sql  - Arquivos relevantes para o banco de dados, aqui estão a conexão e o script para a criação do banco de dados.
-│           ├── createDatabase.sql
-│           ├── dbFacade.php
-│           ├── dbInterface.php
-│           ├── handlers
-│           │   └── userHandler.php
-│           └── types
-│               └── user.php
+├── admin - Pasta principal para admin, separa o código dos aquivos de explicação do projeto.
+│   ├── head.php
+│   ├── index.php
+│   └── login.php
+├── artfacts - Pasta para artefatos de projeto como os scripts de banco de dados.
+│   ├── createDatabaseArtfacts.sql
+│   ├── createDatabaseTables.sql
+│   ├── dropDatabase.sql
+│   └── insertDatabaseTest.sql
 ├── estrutura.txt - Esse arquivo.
 ├── README.md - Arquivo de apresentação do GitHub.
-└── Read Sites.txt - Arquivos que eu lemos durante o projeto.
+├── Read Sites.txt - Arquivos que nós lemos durante o projeto.
+├── resources - Arquivo com os recursos comuns utilizados em admin e usuário.
+│   ├── accessControl.php
+│   ├── adminAccessControl.php
+│   ├── img - Imagens do projeto
+│   │   ├── akkomin.png
+│   │   ├── akko.png
+│   │   └── beta.png
+│   ├── inc.php - Inc PHP, utilizado para variaveis globais.
+│   ├── js - Java script do projeto para utilização offline.
+│   │   ├── angular-animate.min.js
+│   │   ├── angular-aria.min.js
+│   │   ├── angular-material.min.js
+│   │   ├── angular-messages.min.js
+│   │   ├── angular.min.js
+│   │   ├── angular-resource.min.js
+│   │   ├── common.js
+│   │   ├── form.js
+│   │   └── jquery.min.js
+│   ├── style - Css do projeto.
+│   │   ├── admin.css
+│   │   ├── akko.css
+│   │   ├── angular-material.min.css
+│   │   └── bootstrap.min.css
+│   └── template - Pasta com os templates padrão para utilizar no site.
+│       ├── form - formulários para inclusão durante o projeto
+│       │   ├── adminLogin.php
+│       │   ├── createBadge.php
+│       │   ├── createCountry.php
+│       │   ├── createGovernmentDristrict.php
+│       │   ├── createGrade.php
+│       │   ├── createIdiom.php
+│       │   ├── createProfile.php
+│       │   ├── createProfileType.php
+│       │   ├── userLogin.php
+│       │   └── userRegister.php
+│       ├── handler - handlers de banco de dados.
+│       │   ├── admin.php
+│       │   ├── badge.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profileType.php
+│       │   └── user.php
+│       ├── insert - caller de inserção no banco de dados.
+│       │   ├── admin.php
+│       │   ├── badge.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profileType.php
+│       │   └── user.php
+│       ├── list - Caller de listagem no banco de dados.
+│       │   ├── admin.php
+│       │   ├── badges.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profileType.php
+│       │   └── users.php
+│       ├── sql - Interfaces e parents de comunicação com o banco
+│       │   ├── dbFacade.php
+│       │   └── dbInterface.php
+│       └── types - objetos de tipo.
+│           ├── admin.php
+│           ├── badge.php
+│           ├── city.php
+│           ├── country.php
+│           ├── error.php
+│           ├── governmentDistrict.php
+│           ├── grade.php
+│           ├── idiomLevel.php
+│           ├── idiom.php
+│           ├── profileType.php
+│           └── user.php
+└── user - main de usuário comum.
+    ├── head.php
+    ├── index.php
+    ├── login.php
+    └── register.php

@@ -5,7 +5,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
 require_once($rootPath . '/resources/template/sql/dbInterface.php');
-require_once($rootPath . '/resources/template/sql/types/user.php');
+require_once($rootPath . '/resources/template/types/user.php');
 
 class userHandler extends dbFacade implements dbInterface{
 
@@ -69,14 +69,14 @@ class userHandler extends dbFacade implements dbInterface{
         }
     }
 
-    public function select($lastUser){
+    public function select($firstElement){
         if(!self::$dbHandler) {
             $this->connect();
         }
         $stmt = self::$dbHandler->prepare("SELECT * FROM `user` 
                                             WHERE `user_id` > :last_user 
                                             ORDER BY `user_id` LIMIT 25");
-        $stmt->bindValue(':last_user', $lastUser);
+        $stmt->bindValue(':last_user', $firstElement);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -86,7 +86,7 @@ class userHandler extends dbFacade implements dbInterface{
             $this->connect();
         }
         $stmt = self::$dbHandler->prepare("SELECT * FROM `user` 
-                                            WHERE `user_id` > :user_id");
+                                            WHERE `user_id` = :user_id");
         $stmt->bindValue(':user_id', $userId);
         $stmt->execute();
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);

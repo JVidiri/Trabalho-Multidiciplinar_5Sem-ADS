@@ -4,9 +4,9 @@
 ?>
 <html>
 <head>
-	<title>Akko Admin</title>
+	<title>Akko</title>
 	<meta charset="UTF-8">
-	<link rel="icon" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/img/akko-logo-min.png">
+	<link rel="icon" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/img/akkomin.png">
 	<!-- Include of CSS -->
 	<link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/bootstrap.min.css">
     <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/angular-material.min.css">	

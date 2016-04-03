@@ -2,8 +2,8 @@
 	<h3>Login</h3>
 	<form role="form" method="post" action="<?php echo $submitAction ?>">
 		<label class="form-group">
-			<h4>E-mail: </h4>
-			<input type="text" class="form-control" name="mail" required />			
+			<h4>Name: </h4>
+			<input type="text" class="form-control" name="name" required />			
 			<div class="bar"></div>
 		</label>	
 		<label class="form-group">
@@ -12,8 +12,7 @@
 			<div class="bar"></div>
 		</label>
 		<div class="form-group">
-			<input type="submit" class="btn btn-default" value="Logar" />
-			<a href="/Trabalho-Multidiciplinar_5Sem-ADS/user/register.php" class="btn btn-default">Registrar-se</a>
+			<input type="submit" class="btn btn-default" value="Logar" />			
 		</div>		
 	</form>
 </div>

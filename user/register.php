@@ -1,5 +1,5 @@
 <?php require_once('head.php');?>
-<?php require_once($rootPath.'/resources/registerControl.php');?>
+<?php require_once($rootPath.'/resources/template/insert/user.php');?>
 <body>
 	<div class="error">
 		<p>
@@ -21,7 +21,7 @@
 	</div>
 	<h3>Registre-se</h3>
 	<?php
-		$submitAction = '#';
+		$submitAction = 'login.php';
 		include($rootPath.'/resources/template/form/userRegister.php');
 	?>
 </body>
