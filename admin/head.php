@@ -18,5 +18,7 @@
     <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-animate.min.js"></script>
     <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-aria.min.js"></script>
 	<script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-messages.min.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.js"></script>    
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/svg-assets-cache.js"></script>
+	<script src="adminCtrl.js"></script>
 </head>

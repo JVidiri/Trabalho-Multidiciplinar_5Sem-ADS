@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<link rel="icon" href="resources/img/akkomin.png">
+	<!-- Include of CSS -->
+	<link rel="stylesheet" href="resources/style/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/style/angular-material.min.css">	
+	<link rel="stylesheet" href="resources/style/akko.css">
+	<style type="text/css">
+.inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/ }
+  .inputdemoIcons .inputIconDemo {
+    min-height: 48px; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+    color: green; }
+  .inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+    color: dodgerblue; }
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+    color: red; }
+
+
+/*
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+*/
+	</style>
+	<!-- Include of java scripts -->
+	<script src="resources/js/common.js"></script>
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/angular.min.js"></script>
+	<script src="resources/js/angular-animate.min.js"></script>
+	<script src="resources/js/angular-aria.min.js"></script>
+	<script src="resources/js/angular-messages.min.js"></script>
+	<script src="resources/js/angular-material.min.js"></script>
+	<script src="resources/js/svg-assets-cache.js"></script>
+
+	<script type="text/javascript">
+		angular
+  .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
+  .controller('DemoCtrl', function($scope) {
+    $scope.user = {
+      name: '',
+      email: '',
+      phone: '',
+
+    };
+  });
+	</script>
+</head>
+<body>
+	<div ng-controller="DemoCtrl" layout="column" layout-padding="" ng-cloak="" class="inputdemoIcons" ng-app="MyApp">
+
+  <br>
+  <md-content class="md-no-momentum">
+    <md-input-container class="md-icon-float md-block">
+      <!-- Use floating label instead of placeholder -->
+      <label>Name</label>
+      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+      <input ng-model="user.name" type="text">
+    </md-input-container>    
+
+    <md-input-container class="md-block">
+      <!-- Use floating placeholder instead of label -->
+      <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+      <input ng-model="user.email" type="email" placeholder="Email (required)" ng-required="true">
+    </md-input-container>
+  </md-content>
+
+</div>
+
+<!--
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
+-->
+
+</body>
+</html>
