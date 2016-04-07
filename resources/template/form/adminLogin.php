@@ -1,6 +1,6 @@
 <script type="text/javascript">
 angular
-  .module('LoginApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngMdIcons'])
+  .module('LoginApp',['ngMaterial', 'ngMessages', 'ngMdIcons'])
   .controller('LoginCtrl', function($scope) {
     $scope.user = {
       name: '',
@@ -96,7 +96,9 @@ angular
 		<form role="form" method="post" action="<?php echo $submitAction ?>" >
 		    <md-input-container class="md-icon-float md-block">		      
 		      <label>Nome</label>
-		      <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+		      <md-icon class="name">
+		      	<ng-md-icon icon="person" size="24px"></ng-md-icon>
+		      </md-icon>
 		      <input ng-model="user.name" type="text" name="name">
 		    </md-input-container>    
 
