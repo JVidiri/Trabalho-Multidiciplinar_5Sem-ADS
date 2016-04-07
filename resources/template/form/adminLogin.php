@@ -1,9 +1,9 @@
-<div class="login-container">
+<div class="login-container">//interface para executar login
 	<h3>Login</h3>
-	<form role="form" method="post" action="<?php echo $submitAction ?>">
+	<form role="form" method="post" action="<?php echo $submitAction ?>">//utilização do metodo post para envio de dados
 		<label class="form-group">
 			<h4>Name: </h4>
-			<input type="text" class="form-control" name="name" required />			
+			<input type="text" class="form-control" name="name" required />	//nome somente recebera um texto		
 			<div class="bar"></div>
 		</label>	
 		<label class="form-group">
