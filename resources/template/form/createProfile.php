@@ -39,7 +39,7 @@
 		<input type="url" name="curriculum" required />
 		<strong><abbr title="required">*</abbr></strong>
 	</label>
-	<!-- TODO Add a option to add a adress, like in https://developers.google.com/places/javascript/ search for "place autocomplete".-->
+	<!-- TODO Add a option to add a adress, like in https://developers.google.com/places/javascript/ search for "place autocomplete".-->	
 	<!-- TODO Let the user add zero or more grades. -->
 	<!-- TODO Let the user add zero or more experiences. -->
 	<!-- TODO Let the user add zero or more sites. -->
