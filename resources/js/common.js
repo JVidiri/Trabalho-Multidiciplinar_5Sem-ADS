@@ -12,8 +12,27 @@ function clientSideRequest(id, url){
   	xhttp.send();
 }
 
+/*
+	  Creates new fields in the container with name equals a member_x where x 
+	  fis a the last input number +1
+*/
+function addFields(container, member){
+    // Container <div> where dynamic content will be placed
+    var container = document.getElementById(container);
+    var lastAdd = container.lastChild;
+    var i = 1;
+    if (lastAdd != null){
+    	i = parseInt(lastAdd.getAttribute("name").split('_')[1]) + 1;
+	}
+    // Create an <input> element, set its type and name attributes
+    var input = document.createElement("md-input");
+    input.name = member+ "_" + i;
+    container.appendChild(input);        
+    
+}
+
 /* Angular Declaring the Akko Angular module and it's dependences. */
-var AkkoApp = angular.module('AkkoApp',['ngMaterial', 'ngMessages', 'ngMdIcons']);
+var AkkoApp = angular.module('AkkoApp',['ngMaterial', 'ngMessages', 'ngAria', 'ngAnimate']);
 /* Angular material theme config for the colors of akko created in: http://mcg.mbitson.com/#/ (Re-idented)*/
 AkkoApp.config(
 	function($mdThemingProvider) {

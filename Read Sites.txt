@@ -9,3 +9,5 @@ Things we are reading:
   http://yagudaev.com/posts/resolving-php-relative-path-problem/
   https://getcomposer.org/doc/04-schema.md#autoload
   http://stackoverflow.com/questions/8311320/how-to-change-the-session-timeout-in-php
+  https://en.gravatar.com/site/implement/profiles/json/
+  https://css-tricks.com/animations-the-angular-way/
