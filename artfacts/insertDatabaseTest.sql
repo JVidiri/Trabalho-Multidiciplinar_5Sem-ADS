@@ -38,27 +38,17 @@ insert into grade values (02, 'Pós graduação completa', 50, 55);# 'Pós gradu
 
 insert into profile_grade values (666,02);
 
-insert into experience values (01, 'Webmaster em Ed Interactive', 
+insert into experience values (01, 666, 'Webmaster em Ed Interactive', 
 							'Manutenção de sites para clientes corporativos 
-							em mais de 20 paises da américa latina.',
+							em mais de 20 paises da américa latina.',							
 							STR_TO_DATE('03/09/2015', '%d/%m/%Y'), 
 							null);
 
-insert into profile_experience values (666, 01);
+insert into user_site values (01, 666, 'https://github.com/jvidiri', 'Github Jvidiri');
 
-insert into user_site values (01, 'https://github.com/jvidiri', 'Github Jvidiri');
+insert into published_work values (01, 666, 'Promocional', 'Site', 'Teste.com.br');
 
-insert into profile_user_site values (666, 01);
-
-insert into published_work values (01, 'Promocional', 
-									'Site', 
-									'Teste.com.br');
-
-insert into profile_published_work values (666, 01);
-
-insert into profile_photo values (01, 666, 
-									'img/users/192387178432204823.png', 
-									STR_TO_DATE('21/03/2016', '%d/%m/%Y'));	
+insert into profile_photo values (01, 666, 'img/users/192387178432204823.png', STR_TO_DATE('21/03/2016', '%d/%m/%Y'));	
 
 insert into idiom_level values (01, 'Fluênte', 'Domina a lingua como um nativo.');
 insert into idiom_level values (02, 'Avançado', 'Domina a lingua para manter conversações, escrever e ler sem grandes dificuldades.');
@@ -69,15 +59,13 @@ insert into idiom values (01, 'Português', 55);
 
 insert into profile_idiom values (666, 1, 1);
 
-insert into phone values (01, '(19) 925009388', 55, 666);
+insert into phone values (01, 666, 55, '(19) 925009388');
 
-insert into aditional_email values (01, 'jovidiri@out.com', 666);
+insert into aditional_email values (01, 666, 'jovidiri@out.com');
 
 insert into post values (01, 666, 'Meu primeiro post', STR_TO_DATE('21/03/2016', '%d/%m/%Y'));
 
-insert into attachment values (01,
-									STR_TO_DATE('21/03/2016', '%d/%m/%Y'),
-									'/att/01/823ry814hqfidfh.jpg', 01 );
+insert into attachment values (01, STR_TO_DATE('21/03/2016', '%d/%m/%Y'), '/att/01/823ry814hqfidfh.jpg', 01 );
 
 insert into contact values (665,666, 0, STR_TO_DATE('22/03/2016', '%d/%m/%Y'));
 

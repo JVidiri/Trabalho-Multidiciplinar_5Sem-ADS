@@ -5,5 +5,5 @@
 	$adminHandler = new adminHandler();
 	//var_dump($adminHandler->select($_GET['lastElement'])); exit();
 	$admins = $adminHandler->select($_GET['lastElement']);	
-	echo json_encode($admins);	
+	echo json_encode($admins);
 ?>

@@ -11,3 +11,5 @@ Things we are reading:
   http://stackoverflow.com/questions/8311320/how-to-change-the-session-timeout-in-php
   https://en.gravatar.com/site/implement/profiles/json/
   https://css-tricks.com/animations-the-angular-way/
+  http://stackoverflow.com/questions/21613065/how-to-run-large-sql-file-in-phpmyadmin
+  
