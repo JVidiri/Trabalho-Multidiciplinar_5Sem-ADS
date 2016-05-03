@@ -4,35 +4,56 @@
 	require_once($rootPath . '/resources/adminAccessControl.php');
 ?>	
 <body>
-	<div class="error">
-		<p>
-			<?php 
-				if (isset($accessErrorMessage)){
-					echo $accessErrorMessage;
-					exit;
-				}
-			?>
-		</p>
-	</div>
-	<div class="header">
-		<h1>Akko Admin</h1>		
-	</div>
-	<div class="leftMenu">
-		<ul>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0');" target="#content">Usuário admin</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/users.php?lastElement=0');" target="#content">Usuário comum</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badges.php?lastElement=0');" target="#content">Medalhas</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0');" target="#content">País</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/governmentDistrict.php?lastElement=0');" target="#content">Distrito governamental</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/city.php?lastElement=0');" target="#content">Cidade</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/grade.php?lastElement=0');" target="#content">Grau de escolaridade</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiom.php?lastElement=0');" target="#content">Idioma</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiomLevel.php?lastElement=0');" target="#content">Niveis de idioma</a></li>
-			<li><a href="javascript:clientSideRequest('content', '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/profileType.php?lastElement=0');" target="#content">Tipos de perfil</a></li>
-		</ul>
-	</div>
-	<div class="contentAdmin" id="content">
-		<h3>Bem vindo, selecione uma das opções no menu ao lado.</h3>
-	</div>
-</body>
+	 <body layout="row" ng-controller="AppCtrl">
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+      <md-toolbar class="md-tall md-hue-2">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+          <span></span>
+          <div>USER</div>
+        </div>
+      </md-toolbar>
+      <md-list>
+        <md-subheader>Administração</md-subheader>
+        <md-item ng-repeat="item in menu" class="optionList">
+
+          <a href="javascript:clientSideRequest('content', '{{item.link}}');" target="#content" ng-click="changeAddOption($event, item.urlCreateTemplate)">
+            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+              <div class="inset">
+                <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+              </div>
+              <div class="inset">{{item.title}}</div>
+            </md-item-content>
+          </a>
+        </md-item>
+      </md-list>
+    </md-sidenav>
+    <div layout="column" class="relative" layout-fill role="main">
+
+
+      <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="showAdd($event)">
+        <ng-md-icon icon="add"></ng-md-icon>
+      </md-button>
+
+
+
+      <md-toolbar ng-show="!showSearch">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            <ng-md-icon icon="menu"></ng-md-icon>
+          </md-button>
+          <h2>
+            <img src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/img/akkomin.png" style="max-width: 2%;"> Akko Admin
+          </h2>
+          <span flex></span>
+        </div>
+      </md-toolbar>
+      <md-content flex md-scroll-y>
+        <ui-view layout="column" layout-fill layout-padding>
+          <md-content id="content">
+          </md-content>
+        </ui-view>
+      </md-content>
+    </div>
+  </body>
 </html>

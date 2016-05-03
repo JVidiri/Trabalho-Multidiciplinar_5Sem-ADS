@@ -4,7 +4,7 @@
 			<label>
 				<spam>Tipo do badge: </spam>
 				<select name="badge_type">
-					<option value=""></option>					
+					<option value=""></option>
 				</select>
 				<strong><abbr title="required">*</abbr></strong>
 			</label>
