@@ -6,7 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/res
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
 require_once($rootPath . '/resources/template/sql/dbInterface.php');
 require_once($rootPath . '/resources/template/types/admin.php');
-require_once($rootPath . '/resources/composer/vendor/autoload.php');
+/* require_once($rootPath . '/resources/composer/vendor/autoload.php'); */
 
 class adminHandler extends dbFacade implements dbInterface{
 
@@ -113,7 +113,8 @@ class adminHandler extends dbFacade implements dbInterface{
         return $admin;
     }
 }
-
+/*
 $app = new \Slim\Slim();
 $app->get('/admins', 'adminHandler:select');
 $app->run();
+*/
