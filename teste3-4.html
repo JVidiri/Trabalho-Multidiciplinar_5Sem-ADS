@@ -25,7 +25,7 @@
 
 
 
-
+      
       app.controller('AppCtrl', ['$scope', '$mdBottomSheet','$mdSidenav', '$mdDialog', function($scope, $mdBottomSheet, $mdSidenav, $mdDialog){
         $scope.toggleSidenav = function(menuId) {
           $mdSidenav(menuId).toggle();
@@ -113,8 +113,9 @@
         $scope.changeContentAndButtonEffect = function(ev, url1, url2){
           addOption = url1;
           listedOption = url2;
-          alert(listedOption);
-        }
+          console.log(listedOption);
+        };
+      
 
       }]);
         
@@ -147,14 +148,16 @@
         };
 
         app.controller('JsonCtrl', function($scope, $http) {
-
-
-          
           $scope.list = [];
-          $http.get(listedOption)
-          .then(function(res){
-            $scope.list = res.data;               
-          });    
+
+          $scope.loadJson = function() {
+
+            $http.get(listedOption)
+            .then(function(res){
+              $scope.list = res.data;
+              console.log(res.data);
+            });
+          }
         });
 
 
@@ -190,7 +193,7 @@
         <md-subheader>Administração</md-subheader>
         <md-item ng-repeat="item in menu" class="optionList">
 
-          <a target="#content" ng-click="changeContentAndButtonEffect($event, item.urlCreateTemplate,item.link)">
+          <a ng-click="changeContentAndButtonEffect($event, item.urlCreateTemplate,item.link)">
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
               <div class="inset">
                 <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
@@ -224,8 +227,13 @@
       <md-content flex md-scroll-y>
         <ui-view layout="column" layout-fill layout-padding>
           <md-content>
-            <div>
-              <table ng-controller="JsonCtrl">
+            <div ng-controller="JsonCtrl">
+              <a ng-click="loadJson()">
+                <md-button class="md-fab" aria-label="Refresh">
+                  <ng-md-icon icon="autorenew">
+                </md-button>
+              </ng-md-icon></a>
+              <table>
                 <tr>
                   <th ng-repeat="(header, value) in list[0]">
                     {{header}}
