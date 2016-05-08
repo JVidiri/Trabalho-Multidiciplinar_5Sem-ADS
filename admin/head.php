@@ -18,7 +18,7 @@
     <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-aria.js"></script>
 	<script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-messages.js"></script>
     <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.js"></script>        
-    <!--<script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/common.js"></script>-->
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/common.js"></script>
     <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
 	<script src="adminCtrl.js"></script>
 </head>

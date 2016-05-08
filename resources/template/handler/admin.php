@@ -6,6 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/res
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
 require_once($rootPath . '/resources/template/sql/dbInterface.php');
 require_once($rootPath . '/resources/template/types/admin.php');
+require_once($rootPath . '/resources/composer/vendor/autoload.php');
 
 class adminHandler extends dbFacade implements dbInterface{
 
@@ -57,7 +58,7 @@ class adminHandler extends dbFacade implements dbInterface{
         }
     }
 
-    public function select($firstElement){
+    public function select($firstElement = 0){
         if(!self::$dbHandler) {
             $this->connect();
         }
@@ -66,7 +67,7 @@ class adminHandler extends dbFacade implements dbInterface{
                                             ORDER BY `admin_user_id` LIMIT 25");
         $stmt->bindValue(':last_user', $firstElement);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
     public function getUserById($userID){
@@ -112,3 +113,7 @@ class adminHandler extends dbFacade implements dbInterface{
         return $admin;
     }
 }
+
+$app = new \Slim\Slim();
+$app->get('/admins', 'adminHandler:select');
+$app->run();
