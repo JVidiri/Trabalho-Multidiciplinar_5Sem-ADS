@@ -1,8 +1,8 @@
 <?php //interface para executar login ?>
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog>
 	<md-content class="md-padding">
 		<div layout="column" layout-padding="" ng-cloak="" class="login-container" ng-app="AkkoApp">
-			<md-content md-theme="AkkoTheme" class="md-no-momentum " layout-padding>
+			<md-content class="md-no-momentum " layout-padding>
 				<h3>Login</h3>
 				<form role="form" method="post" action="<?php echo $submitAction ?>" >
 					<?php //utilização do metodo post para envio de dados, O submitAction vem do arquivo que inclui este form. ?>
@@ -30,7 +30,7 @@
 				      	<input ng-model="user.password" type="password" name="password_conf">
 				    </md-input-container>
 					<div class="form-group">
-						<md-button class="md-raised md-accent" type="submit">Salvar</md-button>
+						<md-button type="submit">Salvar</md-button>
 					</div>		
 				</form>  	
 			</md-content>
