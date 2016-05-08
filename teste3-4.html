@@ -150,13 +150,18 @@
         app.controller('JsonCtrl', function($scope, $http) {
           $scope.list = [];
 
-          $scope.loadJson = function() {
+          $scope.loadJson = function(ev) {
 
             $http.get(listedOption)
             .then(function(res){
               $scope.list = res.data;
               console.log(res.data);
             });
+          }
+
+          $scope.mostrarId = function(ev, row){
+            console.log(row[Object.keys(row)[0]]);
+            
           }
         });
 
@@ -228,7 +233,7 @@
         <ui-view layout="column" layout-fill layout-padding>
           <md-content>
             <div ng-controller="JsonCtrl">
-              <a ng-click="loadJson()">
+              <a ng-click="loadJson($event)">
                 <md-button class="md-fab" aria-label="Refresh">
                   <ng-md-icon icon="autorenew">
                 </md-button>
@@ -243,6 +248,8 @@
                   <td ng-repeat="cell in row" >
                     {{cell}}
                   </td>
+                  <td style="color: red;"><md-button ng-click="mostrarId($event, row)">deletar</md-button></td>
+                  <td style="color: Blue;">Editar</td>
                 </tr>
               </table>
             </div>
