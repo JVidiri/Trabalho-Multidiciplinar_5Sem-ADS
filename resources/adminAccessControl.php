@@ -13,7 +13,7 @@ session_start();
 if (isset($_GET['logoff'])){
 	unset($_SESSION['name']);
 	unset($_SESSION['password']);
-	$accessErrorMessage = 'logoff.';
+	$accessErrorMessage = 'Sessão encerrada.';	
 }else{
 	/*
 		Verify if the user information is already in _SESSION 

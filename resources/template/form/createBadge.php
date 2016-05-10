@@ -13,8 +13,7 @@
         			<label>Descrição</label>
         			<input name="badgeDescription">
         		</md-input-container>
-
-                        <md-button class="md-raised md-primary" type="submit">Enviar</md-button>
+                <md-button class="md-raised md-primary" type="submit">Enviar</md-button>
 	       </form>
 	</md-content>
 </md-dialog>

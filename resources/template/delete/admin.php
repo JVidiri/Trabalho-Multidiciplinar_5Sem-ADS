@@ -10,12 +10,13 @@ require_once($rootPath . '/resources/template/handler/admin.php');
 /*
 	Verify if the admin information is in _POST var.
 */
-if ( isset($_POST['adminId']) ){
-	$adminId = $_POST['adminId'];	
-	
-	$adminHandler = new adminHandler();
-	$adminHandler->delete($adminId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$admin = json_decode($requestBody);
+$adminId = $admin->admin_user_id;
+echo $adminId;
+$adminHandler = new adminHandler();
+$adminHandler->delete($adminId);
+echo json_encode("{ret: \"Deletado com sucesso.\"}");
+exit;
 ?>

@@ -9,6 +9,7 @@
 */
 
 insert into admin_user values (01, 'JVidiri', PASSWORD('@cfjl12365'));
+insert into admin_user values (02, 'Admin', PASSWORD('123'));
 
 insert into user values (665,'João', 'jovidiri@mail.com', PASSWORD('joao12365'), 1, STR_TO_DATE('20/03/2016', '%d/%m/%Y'), STR_TO_DATE('20/03/2016', '%d/%m/%Y'));
 insert into user values (666,'Leticia', 'leticc@outlook.com', PASSWORD('leticia12365'), 1,  STR_TO_DATE('21/03/2016', '%d/%m/%Y'), STR_TO_DATE('29/03/2016', '%d/%m/%Y'));

@@ -20,7 +20,7 @@ class adminHandler extends dbFacade implements dbInterface{
                                                 VALUES (:name, PASSWORD(:pass_hash))");
 
             $stmt->bindValue(':name', $toAdd->name);            
-            $stmt->bindValue(':pass_hash', $toAdd->pass_hash);            
+            $stmt->bindValue(':pass_hash', $toAdd->pass_hash);
             $ret = $stmt->execute();
             return $ret;
         }else{
@@ -62,12 +62,13 @@ class adminHandler extends dbFacade implements dbInterface{
         if(!self::$dbHandler) {
             $this->connect();
         }
-        $stmt = self::$dbHandler->prepare("SELECT * FROM `admin_user` 
+        $stmt = self::$dbHandler->prepare("SELECT `admin_user_id`, `name` FROM `admin_user` 
                                             WHERE `admin_user_id` > :last_user 
                                             ORDER BY `admin_user_id` LIMIT 25");
         $stmt->bindValue(':last_user', $firstElement);
         $stmt->execute();
-        echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        //echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getUserById($userID){
