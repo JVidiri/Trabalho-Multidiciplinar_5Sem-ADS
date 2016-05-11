@@ -45,7 +45,7 @@
       </md-toolbar>
       <md-list>        
         <md-item ng-repeat="item in menu" class="optionList">
-          <span ng-click="changeContentAndButtonEffect($event, item.urlCreateTemplate,item.link,item.urlDelete)">
+          <span ng-click="changeBehavior($event, item)">
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
               <div class="inset">
                 <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
@@ -71,11 +71,11 @@
           <span flex></span>
         </div>
       </md-toolbar>
-      <md-content flex md-scroll-y>
-        <ui-view layout="column" layout-fill layout-padding>
+      <md-content flex>
+        <ui-view layout="column" layout-padding>
           <md-content>
             <div>              
-              <table wt-responsive-table class="table table-striped responsive" >
+              <table wt-responsive-table class="table table-striped responsive">
                 <tr>
                   <th ng-repeat="(header, value) in list[0]">
                     {{header}}
@@ -87,12 +87,12 @@
                   <td ng-repeat="cell in row" >
                     {{cell}}
                   </td>
-                  <td style="color: red;">
+                  <td>
                     <md-button ng-click="deleteById($event, row)" aria-label="Deletar">
                       <ng-md-icon icon="delete"></ng-md-icon>
                     </md-button>
                   </td>
-                  <td style="color: Blue;">
+                  <td>
                     <md-button ng-click="mostrarId($event, row)" aria-label="Alterar">
                       <ng-md-icon icon="settings"></ng-md-icon>
                     </md-button></td>

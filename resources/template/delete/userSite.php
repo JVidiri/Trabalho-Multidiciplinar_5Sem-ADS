@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/userSite.php');
 /*
 	Verify if the userSite information is in _POST var.
 */
-if ( isset($_POST['userSiteId']) ){
-	$userSiteId = $_POST['userSiteId'];	
-
-	$userSiteHandler = new userSiteHandler();
-	$userSiteHandler->delete($userSiteId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$userSite = json_decode($requestBody);
+$userSiteId = $userSite->userSite_id;
+$userSiteHandler = new userSiteHandler();
+$userSiteHandler->delete($userSiteId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

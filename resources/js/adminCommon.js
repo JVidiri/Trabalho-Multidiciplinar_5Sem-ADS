@@ -3,10 +3,8 @@ app.config(function($compileProvider){
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
 });
 
-var addOption = '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createBadge.php';
-var listedOption = '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0';
 var parentEl = angular.element(document.body);
-var urlDelete = '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php';
+var actualItem = null;
 
 app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$location', function($scope, $http,$mdBottomSheet, $mdSidenav, $mdDialog, $location){
   $scope.toggleSidenav = function(menuId) {
@@ -14,139 +12,146 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   };
   $scope.menu = [
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
     title: 'Usuário admin',
     icon: 'account_circle',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/adminRegister.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php'
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/adminRegister.php',
+    urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php',
+    urlupdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
+    idName: 'admin_user_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?lastElement=0',
     title: 'Usuário comum',
     icon: 'account_circle',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/userRegister.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/user.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/userRegister.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/user.php',
+    idName: 'user_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badge.php?lastElement=0',
     title: 'Medalhas',
     icon: 'favorite',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createBadge.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/badge.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badge.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createBadge.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/badge.php',
+    idName: 'badge_id'
   },
   {
-    link: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0',
     title: 'País',
     icon: 'room',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createCountry.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/country.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createCountry.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/country.php',
+    idName: 'country_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/governmentDistrict.php?lastElement=0',
     title: 'Distrito governamental',
     icon: 'room',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createGovernmentDistrict.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/governmentDistrict.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/governmentDistrict.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createGovernmentDistrict.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/governmentDistrict.php',
+    idName: 'government_district_id'
   },
   {
-    link: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/city.php?lastElement=0',
     title: 'Cidade',
     icon: 'room',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createCity.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/city.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/city.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createCity.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/city.php',
+    idName: 'city_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/grade.php?lastElement=0',
     title: 'Grau de escolaridade',
     icon: 'assignment',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createGrade.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/grade.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/grade.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createGrade.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/grade.php',
+    idName: 'grade_id'
+
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiom.php?lastElement=0',
     title: 'Idioma',
     icon: 'assignment',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createIdiom.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/idiom.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiom.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createIdiom.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/idiom.php',
+    idName: 'idiom_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiomLevel.php?lastElement=0',
     title: 'Niveis de idioma',
     icon: 'assignment',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createIdiomLevel.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/idiomLevel.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/idiomLevel.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createIdiomLevel.php',
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/idiomLevel.php',
+    idName: 'idiom_level_id'
   },
   {
-    link : '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/profileType.php?lastElement=0',
     title: 'Tipos de perfil',
     icon: 'assignment',
-    urlCreateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createProfileType.php',
-    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/profileType.php'
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/profileType.php?lastElement=0',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createProfileType.php',    
+    urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/profileType.php',
+    idName: 'profile_type_id'
   }
   ];
 
   $scope.list = [];
-  $scope.loadJson = function(ev) {
-    $http.get(listedOption)
+  $scope.loadJson = function(ev) {    
+    $http.get(actualItem.urlList)
     .then(function(res){
-      $scope.list = res.data;
-      console.log(res.data);
+      $scope.list = res.data;      
     });
-  }
-
-  $scope.mostrarId = function(ev, row){
-    console.log(row[Object.keys(row)[0]]);
-  }
+  };
 
   $scope.deleteById = function(ev, row){    
-    var data = {};
-    data[Object.keys(row)[0]] = row[Object.keys(row)[0]];                    
-    $http.post(urlDelete, data)
+    var data = {}; 
+    data[actualItem.idName] = row[actualItem.idName];
+    $http.post(actualItem.urlDelete, data)
     .success(function (data, status, headers, config) {
-      $scope.PostDataResponse = data;
+      $scope.PostDataResponse = data;      
       $scope.loadJson();
+    })
+    .error(function (data, status, headers, config) {
+      alert('Errrooou!');
+    });    
+  };
+
+  $scope.insertNew = function() {    
+    var data = $scope.fields;    
+    $http.post(actualItem.urlInsert, data)
+    .success(function (data, status, headers, config) {      
+      $scope.PostDataResponse = data;
+    })
+    .error(function (data, status, headers, config) {
+      alert('Errrooou!');
     });
-  }
+    
+    $mdDialog.hide();
+  };
 
   $scope.logOff = function() {
       $location.url("http://localhost/Trabalho-Multidiciplinar_5Sem-ADS/admin/index.php?logoff=1");
   };
 
+  $scope.changeBehavior = function(ev, item){    
+    actualItem = item;    
+    $scope.loadJson();
+  };
+
   $scope.showAdd = function(ev) {
     $mdDialog.show({
       controller: DialogController,
-      templateUrl: addOption,
+      templateUrl: actualItem.urlInsertTemplate,
       parent: parentEl,
       targetEvent: ev
     })
-    .then(function(answer) {
-      $scope.alert = '';
-    }, function() {
-      $scope.alert = '';
+    .then(function(answer) {      
+      $scope.loadJson();
     });
   };
 
-  $scope.changeContentAndButtonEffect = function(ev, urlForForm, urlForList, urlForDelete){
-    addOption = urlForForm;
-    listedOption = urlForList;
-    urlDelete = urlForDelete;
-    $scope.loadJson();          
-  };
 }]);
-
-app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
-  $scope.items = [
-  { name: 'Share', icon: 'share' },
-  { name: 'Upload', icon: 'upload' },
-  { name: 'Copy', icon: 'copy' },
-  { name: 'Print this page', icon: 'print' },
-  ];
-
-  $scope.listItemClick = function($index) {
-    var clickedItem = $scope.items[$index];
-    $mdBottomSheet.hide(clickedItem);
-  };
-});    
 
 function DialogController($scope, $mdDialog) {
   $scope.hide = function() {

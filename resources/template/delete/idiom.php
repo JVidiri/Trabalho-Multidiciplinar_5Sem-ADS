@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/idiom.php');
 /*
 	Verify if the idiom information is in _POST var.
 */
-if ( isset($_POST['idiomId']) ){
-	$idiomId = $_POST['idiomId'];	
-
-	$idiomHandler = new idiomHandler();
-	$idiomHandler->delete($idiomId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$idiom = json_decode($requestBody);
+$idiomId = $idiom->idiom_id;
+$idiomHandler = new idiomHandler();
+$idiomHandler->delete($idiomId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

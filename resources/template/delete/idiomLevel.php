@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/idiomLevel.php');
 /*
 	Verify if the idiomLevel information is in _POST var.
 */
-if ( isset($_POST['idiomLevelId']) ){
-	$idiomLevelId = $_POST['idiomLevelId'];	
-
-	$idiomLevelHandler = new idiomLevelHandler();
-	$idiomLevelHandler->delete($idiomLevelId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$idiomLevel = json_decode($requestBody);
+$idiomLevelId = $idiomLevel->idiomLevel_id;
+$idiomLevelHandler = new idiomLevelHandler();
+$idiomLevelHandler->delete($idiomLevelId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

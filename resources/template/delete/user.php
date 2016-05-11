@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/user.php');
 /*
 	Verify if the user information is in _POST var.
 */
-if ( isset($_POST['userId']) ){
-	$userId = $_POST['userId'];	
-
-	$userHandler = new userHandler();
-	$userHandler->delete($userId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$user = json_decode($requestBody);
+$userId = $user->user_id;
+$userHandler = new userHandler();
+$userHandler->delete($userId);
+echo json_encode("{ret: \"Deletado com sucesso.\"}");
+exit;
 ?>

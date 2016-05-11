@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/profileType.php');
 /*
 	Verify if the profileType information is in _POST var.
 */
-if ( isset($_POST['profileTypeId']) ){
-	$profileTypeId = $_POST['profileTypeId'];	
-
-	$profileTypeHandler = new profileTypeHandler();
-	$profileTypeHandler->delete($profileTypeId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$profileType = json_decode($requestBody);
+$profileTypeId = $profileType->profileType_id;
+$profileTypeHandler = new profileTypeHandler();
+$profileTypeHandler->delete($profileTypeId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

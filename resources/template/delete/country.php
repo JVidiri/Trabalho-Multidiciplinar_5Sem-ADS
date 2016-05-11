@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/country.php');
 /*
 	Verify if the country information is in _POST var.
 */
-if ( isset($_POST['countryId']) ){
-	$countryId = $_POST['countryId'];	
-
-	$countryHandler = new countryHandler();
-	$countryHandler->delete($countryId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$country = json_decode($requestBody);
+$countryId = $country->country_id;
+$countryHandler = new countryHandler();
+$countryHandler->delete($countryId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

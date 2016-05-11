@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/profilePhoto.php');
 /*
 	Verify if the profilePhoto information is in _POST var.
 */
-if ( isset($_POST['profilePhotoId']) ){
-	$profilePhotoId = $_POST['profilePhotoId'];	
-
-	$profilePhotoHandler = new profilePhotoHandler();
-	$profilePhotoHandler->delete($profilePhotoId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$profilePhoto = json_decode($requestBody);
+$profilePhotoId = $profilePhoto->profilePhoto_id;
+$profilePhotoHandler = new profilePhotoHandler();
+$profilePhotoHandler->delete($profilePhotoId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

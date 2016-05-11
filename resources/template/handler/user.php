@@ -73,7 +73,7 @@ class userHandler extends dbFacade implements dbInterface{
         if(!self::$dbHandler) {
             $this->connect();
         }
-        $stmt = self::$dbHandler->prepare("SELECT * FROM `user` 
+        $stmt = self::$dbHandler->prepare("SELECT `user_id`, `name`, `mail`, `is_confirmed`, `created`, `last_login` FROM `user` 
                                             WHERE `user_id` > :last_user 
                                             ORDER BY `user_id` LIMIT 25");
         $stmt->bindValue(':last_user', $firstElement);

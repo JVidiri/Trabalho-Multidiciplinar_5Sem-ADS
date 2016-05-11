@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/city.php');
 /*
 	Verify if the city information is in _POST var.
 */
-if ( isset($_POST['cityId']) ){
-	$cityId = $_POST['cityId'];	
-
-	$cityHandler = new cityHandler();
-	$cityHandler->delete($cityId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$city = json_decode($requestBody);
+$cityId = $city->city_id;
+$cityHandler = new cityHandler();
+$cityHandler->delete($cityId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

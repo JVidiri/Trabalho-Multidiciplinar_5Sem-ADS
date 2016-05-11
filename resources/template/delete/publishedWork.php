@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/publishedWork.php');
 /*
 	Verify if the publishedWork information is in _POST var.
 */
-if ( isset($_POST['publishedWorkId']) ){
-	$publishedWorkId = $_POST['publishedWorkId'];	
-
-	$publishedWorkHandler = new publishedWorkHandler();
-	$publishedWorkHandler->delete($publishedWorkId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$publishedWork = json_decode($requestBody);
+$publishedWorkId = $publishedWork->publishedWork_id;
+$publishedWorkHandler = new publishedWorkHandler();
+$publishedWorkHandler->delete($publishedWorkId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>

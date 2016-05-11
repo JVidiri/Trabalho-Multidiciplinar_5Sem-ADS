@@ -10,12 +10,12 @@ require_once($rootPath . '/resources/template/handler/grade.php');
 /*
 	Verify if the grade information is in _POST var.
 */
-if ( isset($_POST['gradeId']) ){
-	$gradeId = $_POST['gradeId'];	
-
-	$gradeHandler = new gradeHandler();
-	$gradeHandler->delete($gradeId);
-	echo json_encode("Deletado com sucesso.");
-	exit;
-}
+$requestBody = file_get_contents('php://input');
+echo $requestBody;
+$grade = json_decode($requestBody);
+$gradeId = $grade->grade_id;
+$gradeHandler = new gradeHandler();
+$gradeHandler->delete($gradeId);
+echo json_encode("Deletado com sucesso.");
+exit;
 ?>
