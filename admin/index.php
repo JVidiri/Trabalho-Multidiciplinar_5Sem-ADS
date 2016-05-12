@@ -93,7 +93,7 @@
                     </md-button>
                   </td>
                   <td>
-                    <md-button ng-click="mostrarId($event, row)" aria-label="Alterar">
+                    <md-button ng-click="updateById($event, row)" aria-label="Alterar">
                       <ng-md-icon icon="settings"></ng-md-icon>
                     </md-button></td>
                 </tr>

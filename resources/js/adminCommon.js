@@ -18,7 +18,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php',
-    urlupdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
     idName: 'admin_user_id'
   },
   {
@@ -117,7 +117,20 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     });    
   };
 
-  $scope.insertNew = function() {    
+  $scope.updateById = function(ev, row){ 
+    var data = {};
+    data[actualItem.idName] = row[actualItem.idName];
+    $http.post(actualItem.urlUpdate, data)
+    .success(function (data, status, headers, config) {
+      $scope.PostDataResponse = data;      
+      $scope.loadJson();
+    })
+    .error(function (data, status, headers, config) {
+      alert('Errrooou!');
+    });    
+  };
+
+  $scope.insertNew = function(ev) {    
     var data = $scope.fields;    
     $http.post(actualItem.urlInsert, data)
     .success(function (data, status, headers, config) {      
