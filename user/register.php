@@ -18,11 +18,11 @@
 				}
 			?>
 		</p>
-	</div>
-	<h3>Registre-se</h3>
+	</div>	
 	<?php
 		$submitAction = 'login.php';
-		include($rootPath.'/resources/template/form/userRegister.php');
+		//include($rootPath.'/resources/template/form/userRegister.php');
+		include($rootPath.'/resources/template/form/createProfile.php');
 	?>
 </body>
 </html>

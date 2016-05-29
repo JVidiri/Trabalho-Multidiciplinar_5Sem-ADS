@@ -2,23 +2,8 @@
   require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
   require_once($rootPath . '/resources/template/sql/dbFacade.php');
   require_once($rootPath . '/resources/adminAccessControl.php');
+  require_once($rootPath . '/admin/head.php');
 ?>
-<html lang="en" ng-app="AkkoAdminApp">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/bootstrap.min.css">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.css">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/akko.css">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/admin.css">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/angular-responsive-tables.min.css">
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular.min.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-animate.min.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-aria.min.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material-icons.min.js"></script>    
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/adminCommon.js"></script>    
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-responsive-tables.min.js"></script>
-  </head>
   <div class="error">
       <p>
         <?php 

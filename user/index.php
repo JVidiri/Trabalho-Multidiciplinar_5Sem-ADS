@@ -11,14 +11,12 @@
 			?>
 		</p>
 	</div>
-	<div class="header">
-	</div>
-	<div>	
-	<div class="content">		
-		<h3>Hello <?php echo $username ?> <br />Site under contruction...</h3>
-	</div>
-	<div class="content">
+	<div class="header">		
+		<p>Hello <?php echo $username ?> <br />Site under contruction...</p>
 		<p><a href="login.php?logoff=1">Sair</a></p>
+	</div>		
+	<div class="content">
+		
 	</div>
 	<div class="botton">
 	</div>

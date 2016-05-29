@@ -2,23 +2,24 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 ?>
-<html>
+<html lang="en" ng-app="AkkoAdminApp">
 <head>
 	<title>Akko Admin</title>
 	<meta charset="UTF-8">
 	<link rel="icon" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/img/akkomin.png">
 	<!-- Include of CSS -->
-	<link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/bootstrap.min.css">
-    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/angular-material.css">	
-	<link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/akko.css">	
-	<!-- Include of java scripts -->	
-	<script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/jquery.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-animate.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-aria.js"></script>
-	<script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-messages.js"></script>
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.js"></script>        
-    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/common.js"></script>
+    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/bootstrap.min.css">
+    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.css">
+    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/akko.css">
+    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/admin.css">
+    <link rel="stylesheet" href="/Trabalho-Multidiciplinar_5Sem-ADS/resources/style/angular-responsive-tables.min.css">
+    <!-- Include of js -->
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular.min.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-animate.min.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-aria.min.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material.min.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-material-icons.min.js"></script>    
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/adminCommon.js"></script>
+    <script src="/Trabalho-Multidiciplinar_5Sem-ADS/resources/js/angular-responsive-tables.min.js"></script>
     <script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
-	<script src="adminCtrl.js"></script>
 </head>

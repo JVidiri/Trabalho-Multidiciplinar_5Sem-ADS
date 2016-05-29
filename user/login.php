@@ -1,4 +1,4 @@
-<?php require_once('head.php'); ?>
+<?php require_once('head.php');?>
 <?php require_once($rootPath.'/resources/accessControl.php'); ?>
 <body>
 	<div class="error">

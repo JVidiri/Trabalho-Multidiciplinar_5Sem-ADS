@@ -11,6 +11,7 @@ require_once($rootPath . '/resources/template/types/admin.php');
 class adminHandler extends dbFacade implements dbInterface{
 
     public function insert($toAdd){
+
         if ($this->isRightType($toAdd, "admin")){
             if(!self::$dbHandler) {
                 $this->connect();
@@ -21,10 +22,15 @@ class adminHandler extends dbFacade implements dbInterface{
 
             $stmt->bindValue(':name', $toAdd->name);            
             $stmt->bindValue(':pass_hash', $toAdd->pass_hash);
-            $ret = $stmt->execute();
+            try {
+                $ret = $stmt->execute();
+            } catch (PDOException $e) {
+                $ret = "Database error, try again";
+            }   
             return $ret;
         }else{
-            //TODO return error;
+            $ret = "Object type error";
+            return $ret;
         }
     }  
 
@@ -40,12 +46,12 @@ class adminHandler extends dbFacade implements dbInterface{
     }
 
     public function update($toUpdate){
-        if ($this->isRightType($toAdd, "admin")){
+        if ($this->isRightType($toUpdate, "admin")){
             if(!self::$dbHandler) {
                 $this->connect();
             }            
             $stmt = self::$dbHandler->prepare("UPDATE `admin_user` 
-                                                SET(`name` = :name , `pass_hash` = PASSWORD(:pass_hash)) 
+                                                SET`name` = :name , `pass_hash` = PASSWORD(:pass_hash)
                                                 WHERE `admin_user_id` = :admin_user_id ");
 
             $stmt->bindValue(':admin_user_id', $toUpdate->admin_user_id);
@@ -79,18 +85,32 @@ class adminHandler extends dbFacade implements dbInterface{
                                             WHERE `admin_user_id` = :admin_user_id");
         $stmt->bindValue(':user_id', $userId);
         $stmt->execute();
-        $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-        $user = NULL;   
-        if ($userData) {            
-            $user = new user($userData['user_id'],
-                                $userData['name'],
-                                $userData['mail'],
-                                $userData['pass_hash'],
-                                $userData['is_confirmed'],
-                                $userData['created'],
-                                $userData['last_login']);
+        $adminData = $stmt->fetch(PDO::FETCH_ASSOC);
+        $admin = NULL;   
+        if ($adminData) {            
+            $admin = new admin($adminData['admin_user_id'],
+                                $adminData['name'],                                
+                                $adminData['pass_hash']);
         }
-        return $user;
+        return $admin;
+    }
+
+    public function getUserByAdminName($adminName){
+        if(!self::$dbHandler) {
+            $this->connect();
+        }
+        $stmt = self::$dbHandler->prepare("SELECT * FROM `admin_user` 
+                                            WHERE `name` = :name");
+        $stmt->bindValue(':name', $adminName);
+        $stmt->execute();
+        $adminData = $stmt->fetch(PDO::FETCH_ASSOC);        
+        $admin = NULL;   
+        if ($adminData) {            
+            $admin = new admin($adminData['admin_user_id'],
+                                $adminData['name'],                                
+                                $adminData['pass_hash']);
+        }
+        return $admin;
     }
 
     public function verifyByNameAndPassword($name, $password){
@@ -114,8 +134,3 @@ class adminHandler extends dbFacade implements dbInterface{
         return $admin;
     }
 }
-/*
-$app = new \Slim\Slim();
-$app->get('/admins', 'adminHandler:select');
-$app->run();
-*/

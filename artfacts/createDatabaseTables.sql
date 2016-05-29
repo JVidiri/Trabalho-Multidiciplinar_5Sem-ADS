@@ -10,7 +10,7 @@
 
 create table admin_user(
  	admin_user_id int auto_increment,
- 	name varchar(255) not null,
+ 	name varchar(255) not null unique,
  	pass_hash char(64) not null, /* Not store the password without hashing */
  	#Constrants
  	PRIMARY KEY (admin_user_id)
@@ -51,7 +51,8 @@ create table profile(
 	#Constrants
 	PRIMARY KEY (profile_id),
 	FOREIGN KEY (fk_user_id) REFERENCES user(user_id),
-	FOREIGN KEY (fk_profile_type_id) REFERENCES profile_type(type_id)
+	FOREIGN KEY (fk_profile_type_id) REFERENCES profile_type(type_id),
+	FULLTEXT complete_name_index (complete_name)
 );
 
     /* Store countries */
@@ -224,7 +225,8 @@ create table post(
 	date_of_post date not null,
 	#constrants
 	PRIMARY KEY (post_id),
-	FOREIGN KEY (fk_user_id) REFERENCES user(user_id)
+	FOREIGN KEY (fk_user_id) REFERENCES user(user_id),
+	FULLTEXT content_index (content)
 );
 
 	/* This will store the attachiments */
@@ -268,7 +270,8 @@ create table badge(
 	thumb varchar(255) not null,
 	# Constrants
 	PRIMARY KEY (badge_id),
-	FOREIGN KEY (fk_type_id) REFERENCES badge_type(type_id)
+	FOREIGN KEY (fk_type_id) REFERENCES badge_type(type_id),
+	FULLTEXT title_index (title)
 );
 
 	# Link the profile with a medal, given by other user.

@@ -18,7 +18,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php',
-    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/adminUpdateForm.php',
     idName: 'admin_user_id'
   },
   {
@@ -120,14 +120,30 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   $scope.updateById = function(ev, row){ 
     var data = {};
     data[actualItem.idName] = row[actualItem.idName];
-    $http.post(actualItem.urlUpdate, data)
-    .success(function (data, status, headers, config) {
-      $scope.PostDataResponse = data;      
-      $scope.loadJson();
+
+    //de row para um objeto
+    var adminToPass = {
+      id: row[Object.keys(row)[0]],
+      name: row[Object.keys(row)[1]],
+      password: row[Object.keys(row)[2]],
+      password_conf: row[Object.keys(row)[2]]
+    };
+    //Controller p/ passa a receber adminToPass (em locals).
+    //O formulário tem que possuir ng-model referente aos atributos de adminToPass,
+    //Exemplo ng-model="admin.id"
+    $mdDialog.show({
+      controller: ['$scope', 'admin', function($scope, admin) {
+        $scope.admin = admin;
+        console.log($scope.admin);
+      }],
+      locals: { admin: adminToPass },
+      templateUrl: actualItem.urlUpdate,
+      parent: parentEl,
+      targetEvent: ev
     })
-    .error(function (data, status, headers, config) {
-      alert('Errrooou!');
-    });    
+    .then(function(answer) {      
+      $scope.loadJson();
+    });   
   };
 
   $scope.insertNew = function(ev) {    

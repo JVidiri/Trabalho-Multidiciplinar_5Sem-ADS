@@ -1,9 +1,9 @@
 <md-dialog>
-	<md-content class="md-padding">
-	       <form class="form" method="post" action="caduser" enctype="multipart/form-data">
+	<md-content class="md-padding" >
+	       <form class="form" ng-submit="insertNew($event)" ng-controller="AppCtrl">
         		<md-input-container class="md-block" flex-gt-xs>
         			<label>ID (disabled)</label>
-        			<input name="badgeId" type="number" disabled>
+        			<input name="badge_id" type="number" disabled>
         		</md-input-container>
         		<md-input-container class="md-block" flex-gt-xs>
         			<label>Titulo</label>

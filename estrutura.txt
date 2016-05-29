@@ -1,54 +1,108 @@
 Arquivo para apresentar a estrutura de pastas do projeto (será atualizado constantemente).
 =========================================================
 .
-├── admin - Pasta principal para admin, separa o código dos aquivos de explicação do projeto.
+├── admin
 │   ├── head.php
 │   ├── index.php
 │   └── login.php
-├── artfacts - Pasta para artefatos de projeto como os scripts de banco de dados.
+├── artfacts
+│   ├── completeAkkoConfig.sql
+│   ├── completeConfig.sql
 │   ├── createDatabaseArtfacts.sql
 │   ├── createDatabaseTables.sql
+│   ├── dbFullConfigCreator.sh
 │   ├── dropDatabase.sql
 │   └── insertDatabaseTest.sql
-├── estrutura.txt - Esse arquivo.
-├── README.md - Arquivo de apresentação do GitHub.
-├── Read Sites.txt - Arquivos que nós lemos durante o projeto.
-├── resources - Arquivo com os recursos comuns utilizados em admin e usuário.
+├── estrutura.txt
+├── README.md
+├── Read Sites.txt
+├── resources
 │   ├── accessControl.php
 │   ├── adminAccessControl.php
-│   ├── img - Imagens do projeto
+│   ├── composer
+│   │   └── composer.json
+│   ├── img
 │   │   ├── akkomin.png
 │   │   ├── akko.png
-│   │   └── beta.png
-│   ├── inc.php - Inc PHP, utilizado para variaveis globais.
-│   ├── js - Java script do projeto para utilização offline.
+│   │   ├── beta.png
+│   │   └── GoogleMaterialIcons.woff2
+│   ├── inc.php
+│   ├── js
+│   │   ├── adminCommon.js
+│   │   ├── adminMdController.js
+│   │   ├── angular-animate.js
 │   │   ├── angular-animate.min.js
+│   │   ├── angular-aria.js
 │   │   ├── angular-aria.min.js
+│   │   ├── angular.js
+│   │   ├── angular-material-icons.min.js
+│   │   ├── angular-material.js
+│   │   ├── angular-material.min.css
 │   │   ├── angular-material.min.js
-│   │   ├── angular-messages.min.js
+│   │   ├── angular-messages.js
 │   │   ├── angular.min.js
+│   │   ├── angular-resource.js
 │   │   ├── angular-resource.min.js
+│   │   ├── angular-responsive-tables.min.js
 │   │   ├── common.js
 │   │   ├── form.js
-│   │   └── jquery.min.js
-│   ├── style - Css do projeto.
+│   │   ├── installer
+│   │   └── jquery.js
+│   ├── style
 │   │   ├── admin.css
 │   │   ├── akko.css
+│   │   ├── angular-material.css
 │   │   ├── angular-material.min.css
+│   │   ├── angular-responsive-tables.min.css
 │   │   └── bootstrap.min.css
-│   └── template - Pasta com os templates padrão para utilizar no site.
-│       ├── form - formulários para inclusão durante o projeto
+│   └── template
+│       ├── delete
+│       │   ├── admin.php
+│       │   ├── badge.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── experience.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profilePhoto.php
+│       │   ├── profileType.php
+│       │   ├── publishedWork.php
+│       │   ├── user.php
+│       │   ├── userProfile.php
+│       │   └── userSite.php
+│       ├── form
 │       │   ├── adminLogin.php
+│       │   ├── adminRegister.php
 │       │   ├── createBadge.php
+│       │   ├── createCity.php
 │       │   ├── createCountry.php
-│       │   ├── createGovernmentDristrict.php
+│       │   ├── createGovernmentDistrict.php
 │       │   ├── createGrade.php
 │       │   ├── createIdiom.php
 │       │   ├── createProfile.php
 │       │   ├── createProfileType.php
 │       │   ├── userLogin.php
 │       │   └── userRegister.php
-│       ├── handler - handlers de banco de dados.
+│       ├── handler
+│       │   ├── admin.php
+│       │   ├── badge.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── experience.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profilePhoto.php
+│       │   ├── profileType.php
+│       │   ├── publishedWork.php
+│       │   ├── user.php
+│       │   ├── userProfile.php
+│       │   └── userSite.php
+│       ├── Include.php
+│       ├── insert
 │       │   ├── admin.php
 │       │   ├── badge.php
 │       │   ├── city.php
@@ -59,7 +113,7 @@ Arquivo para apresentar a estrutura de pastas do projeto (será atualizado const
 │       │   ├── idiom.php
 │       │   ├── profileType.php
 │       │   └── user.php
-│       ├── insert - caller de inserção no banco de dados.
+│       ├── list
 │       │   ├── admin.php
 │       │   ├── badge.php
 │       │   ├── city.php
@@ -70,33 +124,32 @@ Arquivo para apresentar a estrutura de pastas do projeto (será atualizado const
 │       │   ├── idiom.php
 │       │   ├── profileType.php
 │       │   └── user.php
-│       ├── list - Caller de listagem no banco de dados.
-│       │   ├── admin.php
-│       │   ├── badges.php
-│       │   ├── city.php
-│       │   ├── country.php
-│       │   ├── governmentDistrict.php
-│       │   ├── grade.php
-│       │   ├── idiomLevel.php
-│       │   ├── idiom.php
-│       │   ├── profileType.php
-│       │   └── users.php
-│       ├── sql - Interfaces e parents de comunicação com o banco
+│       ├── sql
 │       │   ├── dbFacade.php
 │       │   └── dbInterface.php
-│       └── types - objetos de tipo.
-│           ├── admin.php
-│           ├── badge.php
-│           ├── city.php
-│           ├── country.php
-│           ├── error.php
-│           ├── governmentDistrict.php
-│           ├── grade.php
-│           ├── idiomLevel.php
-│           ├── idiom.php
-│           ├── profileType.php
-│           └── user.php
-└── user - main de usuário comum.
+│       ├── testHandler.php
+│       ├── types
+│       │   ├── admin.php
+│       │   ├── badge.php
+│       │   ├── city.php
+│       │   ├── country.php
+│       │   ├── error.php
+│       │   ├── experience.php
+│       │   ├── governmentDistrict.php
+│       │   ├── grade.php
+│       │   ├── idiomLevel.php
+│       │   ├── idiom.php
+│       │   ├── profilePhoto.php
+│       │   ├── profileType.php
+│       │   ├── published_work.php
+│       │   ├── user.php
+│       │   ├── userProfile.php
+│       │   └── userSite.php
+│       └── update
+│           └── admin.php
+├── TODO
+│   └── indexForDelete.php
+└── user
     ├── head.php
     ├── index.php
     ├── login.php

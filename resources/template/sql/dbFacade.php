@@ -4,7 +4,7 @@ class dbFacade {
 	protected static $dbHandler = false;
 
 	/*Function to centrilize the connetion to the database.*/
-	function connect() {
+	function connect() {		
     	self::$dbHandler = new PDO('mysql:host=localhost;dbname=IFSP;charset=utf8'
 							, 'root'
 							, '0000');

@@ -11,7 +11,6 @@ require_once($rootPath . '/resources/template/handler/admin.php');
 	Verify if the admin information is in _POST var.
 */
 $requestBody = file_get_contents('php://input');
-echo $requestBody;
 $admin = json_decode($requestBody);
 $adminId = $admin->admin_user_id;
 $adminHandler = new adminHandler();
