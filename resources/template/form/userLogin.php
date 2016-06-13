@@ -9,7 +9,7 @@
 		      	</label>
 		    	<md-icon class="mail">
 		      		<i class="material-icons">mail_outline</i>
-		      	</md-icon>		      	
+		      	</md-icon>
 	      		<input ng-model="user.mail" type="email" name="mail"><?php //Nome somente receberá um texto ?>		      		      
 		    </md-input-container>
 		    <md-input-container class="md-icon-float md-block">			      		      

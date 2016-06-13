@@ -32,7 +32,7 @@ function addFields(container, member){
 }
 
 /* Angular Declaring the Akko Angular module and it's dependences. */
-var AkkoApp = angular.module('AkkoApp',['ngMaterial', 'ngMessages', 'ngAria', 'ngAnimate']);
+var AkkoApp = angular.module('AkkoApp',['ngMaterial', 'ngMessages', 'ngAria']);
 /* Angular material theme config for the colors of akko created in: http://mcg.mbitson.com/#/ (Re-idented)*/
 AkkoApp.config(
 	function($mdThemingProvider) {
@@ -125,3 +125,17 @@ AkkoApp.config(
 		$mdThemingProvider.setDefaultTheme('AkkoTheme');
 	}
 );
+
+AkkoApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
+	$scope.profile = {
+		image:'',
+		firstName:'Eu sou a',
+		lastName:'lenda'
+	};
+
+	$scope.upload = function () {
+	    var uploadBtn = $(element[0].querySelector('#fileInput'));
+	    uploadBtn.click();
+  	};
+
+}]);

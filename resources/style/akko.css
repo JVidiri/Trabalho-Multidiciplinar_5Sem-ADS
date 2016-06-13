@@ -36,6 +36,13 @@ h3{
 }
 
 /* Main (Generic style)*/
+
+.img-circle {
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
 /* fallback */
 @font-face {
   font-family: 'Material Icons';
@@ -83,6 +90,11 @@ h3{
 
 .login-container{
     width: 40%;
+    margin: auto;    
+}
+
+.register-container{
+    width: 80%;
     margin: auto;    
 }
 

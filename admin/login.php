@@ -1,5 +1,5 @@
- <?php require_once('head.php'); ?>
-<?php require_once($rootPath.'/resources/adminAccessControl.php'); ?>
+<?php require_once('head.php'); ?>
+<?php // require_once($rootPath.'/resources/adminAccessControl.php'); ?>
 <body>
 	<div class="error">
 		<p>

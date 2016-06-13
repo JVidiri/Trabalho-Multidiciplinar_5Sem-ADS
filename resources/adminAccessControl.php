@@ -47,10 +47,18 @@ if (isset($_GET['logoff'])){
 		if ($result == NULL){
 			unset($_SESSION['name']);
 			unset($_SESSION['password']);			
-			$accessErrorMessage = 'Usuário e senha incorretos.';		
+			$accessErrorMessage = 'Usuário e senha incorretos.';
 		}else{			
 			$username = $result->name;
 		}
 	}
+}
+if (isset($accessErrorMessage)){
+	echo "<div class='error'>";
+	echo "<p>";
+	echo $accessErrorMessage;
+	echo "</p>";
+	echo "</div>";
+	exit;
 }
 ?>

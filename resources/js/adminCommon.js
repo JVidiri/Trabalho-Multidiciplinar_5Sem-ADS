@@ -128,13 +128,12 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
       password: row[Object.keys(row)[2]],
       password_conf: row[Object.keys(row)[2]]
     };
-    //Controller p/ passa a receber adminToPass (em locals).
-    //O formulário tem que possuir ng-model referente aos atributos de adminToPass,
-    //Exemplo ng-model="admin.id"
+    // Controller p/ passa a receber adminToPass (em locals).
+    // O formulário tem que possuir ng-model referente aos atributos de adminToPass,
+    // Exemplo ng-model="admin.id"
     $mdDialog.show({
       controller: ['$scope', 'admin', function($scope, admin) {
-        $scope.admin = admin;
-        console.log($scope.admin);
+        $scope.admin = admin;   
       }],
       locals: { admin: adminToPass },
       templateUrl: actualItem.urlUpdate,
@@ -143,19 +142,29 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     })
     .then(function(answer) {      
       $scope.loadJson();
-    });   
+    });
   };
 
   $scope.insertNew = function(ev) {    
-    var data = $scope.fields;    
-    $http.post(actualItem.urlInsert, data)
-    .success(function (data, status, headers, config) {      
-      $scope.PostDataResponse = data;
-    })
-    .error(function (data, status, headers, config) {
-      alert('Errrooou!');
-    });
-    
+    var data = $scope.fields;
+    console.log(data);
+    if ('id' in data){
+      $http.post(actualItem.urlUpdate, data)
+      .success(function (data, status, headers, config) {      
+        $scope.PostDataResponse = data;
+      })
+      .error(function (data, status, headers, config) {
+        alert('Errrooou!');
+      });
+    }else{
+      $http.post(actualItem.urlInsert, data)
+      .success(function (data, status, headers, config) {      
+        $scope.PostDataResponse = data;
+      })
+      .error(function (data, status, headers, config) {
+        alert('Errrooou!');
+      });
+    }
     $mdDialog.hide();
   };
 
