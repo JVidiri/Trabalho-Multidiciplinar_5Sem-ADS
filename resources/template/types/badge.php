@@ -11,7 +11,7 @@
         FOREIGN KEY (fk_type_id) REFERENCES badge_type(type_id)
     );
 */
-class user{
+class badge{
 	public $badge_id;
 	public $fk_type_id;
 	public $title;

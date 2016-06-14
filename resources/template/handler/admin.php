@@ -51,12 +51,11 @@ class adminHandler extends dbFacade implements dbInterface{
                 $this->connect();
             }            
             $stmt = self::$dbHandler->prepare("UPDATE `admin_user` 
-                                                SET`name` = :name , `pass_hash` = PASSWORD(:pass_hash)
+                                                SET`name` = :name 
                                                 WHERE `admin_user_id` = :admin_user_id ");
 
             $stmt->bindValue(':admin_user_id', $toUpdate->admin_user_id);
-            $stmt->bindValue(':name', $toUpdate->name);                     
-            $stmt->bindValue(':pass_hash', $toUpdate->pass_hash);        
+            $stmt->bindValue(':name', $toUpdate->name);
             $ret = $stmt->execute();
             return $ret;
         }else{
@@ -68,7 +67,7 @@ class adminHandler extends dbFacade implements dbInterface{
         if(!self::$dbHandler) {
             $this->connect();
         }
-        $stmt = self::$dbHandler->prepare("SELECT `admin_user_id`, `name` FROM `admin_user` 
+        $stmt = self::$dbHandler->prepare("SELECT `admin_user_id`, `name`  FROM `admin_user` 
                                             WHERE `admin_user_id` > :last_user 
                                             ORDER BY `admin_user_id` LIMIT 25");
         $stmt->bindValue(':last_user', $firstElement);

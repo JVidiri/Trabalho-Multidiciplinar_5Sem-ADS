@@ -1,6 +1,5 @@
 <md-dialog>		
-	<md-content class="md-padding">
-		<!--<form role="form" method="post" action="/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php" >-->
+	<md-content class="md-padding">		
 		<form role="form" ng-submit="insertNew($event)" ng-controller="AppCtrl">
 		    <md-input-container class="md-block" flex-gt-xs>
 		      <label>Nome</label>		      

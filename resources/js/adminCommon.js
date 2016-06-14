@@ -6,37 +6,52 @@ app.config(function($compileProvider){
 var parentEl = angular.element(document.body);
 var actualItem = null;
 
+app.controller('badgeTypeLoader', function($scope, $http) {
+  $scope.badgeTypes = [];
+  $http.get('/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badgeType.php?lastElement=0')
+    .then(function(res){      
+      $scope.badgeTypes = res.data;
+    });    
+  $scope.selectedBadgeType = $scope.badgeTypes[0];
+});
+
 app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$location', function($scope, $http,$mdBottomSheet, $mdSidenav, $mdDialog, $location){
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();          
   };
   $scope.menu = [
   {
-    title: 'Usuário admin',
+    title: 'Usuário Administrador',
     icon: 'account_circle',
-    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/adminRegister.php',
+    idName: 'admin_user_id',
     urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/adminRegister.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php',
     urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
-    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/adminUpdateForm.php',
-    idName: 'admin_user_id'
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/adminUpdateForm.php'
   },
   {
     title: 'Usuário comum',
     icon: 'account_circle',
+    idName: 'user_id',
+    urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/adminRegister.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/user.php?lastElement=0',
-    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/userRegister.php',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/user.php',
-    idName: 'user_id'
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/user.php',
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/userUpdateForm.php'
   },
   {
     title: 'Medalhas',
-    icon: 'favorite',
-    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badge.php?lastElement=0',
+    icon: 'favorite',    
+    idName: 'badge_id',
+    urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/badge.php',
     urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createBadge.php',
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badge.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/badge.php',
-    idName: 'badge_id'
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/badge.php',
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/badgeUpdateForm.php'
   },
   {
     title: 'País',
@@ -49,10 +64,13 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   {
     title: 'Distrito governamental',
     icon: 'room',
+    idName: 'government_district_id',
+    urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/governmentDistrict.php',
+    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/governmentDistrictRegister.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/governmentDistrict.php?lastElement=0',
-    urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createGovernmentDistrict.php',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/governmentDistrict.php',
-    idName: 'government_district_id'
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/governmentDistrict.php',
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/governmentDistrictUpdateForm.php'
   },
   {
     title: 'Cidade',
@@ -98,11 +116,14 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   ];
 
   $scope.list = [];
-  $scope.loadJson = function(ev) {    
+  $scope.badgeTypes = [];  
+
+  $scope.loadJson = function(ev) {
     $http.get(actualItem.urlList)
     .then(function(res){
       $scope.list = res.data;      
     });
+
   };
 
   $scope.deleteById = function(ev, row){    
@@ -122,14 +143,12 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     var data = {};
     data[actualItem.idName] = row[actualItem.idName];
 
-    //de row para um objeto
-    console.log(row);
+    //de row para um objeto    
     var objectToPass = {};
     for (var i = Object.keys(row).length - 1; i >= 0; i--) {
       objectToPass[Object.keys(row)[i]] = row[Object.keys(row)[i]];
     };
-
-    console.log(objectToPass);
+    
     $mdDialog.show({
       controller: ['$scope', 'dataFields', function($scope, dataFields) {
         $scope.dataFields = dataFields;   
@@ -146,12 +165,9 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
 
   $scope.insertNew = function(ev) {    
     var data = $scope.fields;    
-    if (!data){      
-      console.log($scope.dataFields);
+    //Se não tem data em fields é sinal de que temos um campo para update.
+    if (!data){
       data = $scope.dataFields;
-    }    
-    if ('admin_user_id' in data){
-      console.log('update');
       $http.post(actualItem.urlUpdate, data)
       .success(function (data, status, headers, config) {      
         $scope.PostDataResponse = data;
