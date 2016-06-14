@@ -18,7 +18,8 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/admin.php',
     urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/admin.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/admin.php',
-    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/adminUpdateForm.php',
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/admin.php',
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/adminUpdateForm.php',
     idName: 'admin_user_id'
   },
   {
@@ -122,21 +123,19 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     data[actualItem.idName] = row[actualItem.idName];
 
     //de row para um objeto
-    var adminToPass = {
-      id: row[Object.keys(row)[0]],
-      name: row[Object.keys(row)[1]],
-      password: row[Object.keys(row)[2]],
-      password_conf: row[Object.keys(row)[2]]
+    console.log(row);
+    var objectToPass = {};
+    for (var i = Object.keys(row).length - 1; i >= 0; i--) {
+      objectToPass[Object.keys(row)[i]] = row[Object.keys(row)[i]];
     };
-    // Controller p/ passa a receber adminToPass (em locals).
-    // O formulário tem que possuir ng-model referente aos atributos de adminToPass,
-    // Exemplo ng-model="admin.id"
+
+    console.log(objectToPass);
     $mdDialog.show({
-      controller: ['$scope', 'admin', function($scope, admin) {
-        $scope.admin = admin;   
+      controller: ['$scope', 'dataFields', function($scope, dataFields) {
+        $scope.dataFields = dataFields;   
       }],
-      locals: { admin: adminToPass },
-      templateUrl: actualItem.urlUpdate,
+      locals: { dataFields: objectToPass },
+      templateUrl: actualItem.urlUpdateTemplate,
       parent: parentEl,
       targetEvent: ev
     })
@@ -146,9 +145,13 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   };
 
   $scope.insertNew = function(ev) {    
-    var data = $scope.fields;
-    console.log(data);
-    if ('id' in data){
+    var data = $scope.fields;    
+    if (!data){      
+      console.log($scope.dataFields);
+      data = $scope.dataFields;
+    }    
+    if ('admin_user_id' in data){
+      console.log('update');
       $http.post(actualItem.urlUpdate, data)
       .success(function (data, status, headers, config) {      
         $scope.PostDataResponse = data;

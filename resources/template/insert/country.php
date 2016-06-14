@@ -5,23 +5,27 @@
   
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
+require_once($rootPath . '/resources/adminAccessControl.php');
 require_once($rootPath . '/resources/template/handler/country.php');
 
 /*
 	Verify if the country information is in _POST var.
 */
-if ( isset($_POST['country_id']) && isset($_POST['name']) && 
-		isset($_POST['thumb_pic']) && isset($_POST['uf'])){
-	$country_id = $_POST['country_id'];
-	$name = $_POST['name'];
-	$thumb_pic = $_POST['thumb_pic'];
-	//TODO verificar como fazer o upload do arquivo.
-	$uf = $_POST['uf'];
-	
+$requestBody = file_get_contents('php://input');
+$country = json_decode($requestBody);
+if ($country){
+	$country_id = $country->country_id;
+	$name = $$country->name;
+	$thumb_pic = $$country->thumb_pic;	
+	$uf = $country->uf;
+
 	$newCountry = new country(NULL, $name, $country_id, $name, $thumb_pic, $uf);	
 	$countryHandler = new countryHandler();
 	$countryHandler->insert($newCountry);
-	$RegisterOk = "Registrado com sucesso!";	
+	echo json_encode("{ret: \"Registrado com sucesso.\"}");
+	exit;
+}else{
+	echo json_encode("{ret: \"Erro no registro.\"}");
 	exit;
 }
 ?>

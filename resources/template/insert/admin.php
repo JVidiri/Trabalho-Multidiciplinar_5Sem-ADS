@@ -22,14 +22,14 @@ if ($admin){
 		$newAdmin = new admin(NULL, $name, $password);	
 		$adminHandler = new adminHandler();
 		$adminHandler->insert($newAdmin);
-		echo json_encode("{ret: \"registrado com sucesso.\"}");
+		echo json_encode("{ret: \"Registrado com sucesso.\"}");
 		exit;
 	}else{
 		echo json_encode("{ret: \"Erro no registro.\"}");
 		exit;
 	}
 }else{
-		echo json_encode("{ret: \"Erro no registro.\"}");
-		exit;
-	}
+	echo json_encode("{ret: \"Erro no registro.\"}");
+	exit;
+}
 ?>

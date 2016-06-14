@@ -11,15 +11,26 @@ require_once($rootPath . '/resources/template/handler/admin.php');
 /*
 	Verify if the admin information is in _POST var.
 */
-if ( isset($_POST['name']) && isset($_POST['pass_hash']) && isset($_POST['adminId']) ){
-	$adminId = $_POST['adminId'];
-	$name = $_POST['name'];
-	$password = $_POST['pass_hash'];
+$requestBody = file_get_contents('php://input');
+$admin = json_decode($requestBody);
+if ($admin){	
+	$id = $admin->admin_user_id;
+	$name = $admin->name;
+	$password = $admin->password;	
+	$password_confirmation = $admin->password_conf;
 
-	$newAdmin = new admin($adminId, $name, $pass_hash);
-	$adminHandler = new adminHandler();
-	$adminHandler->update($newAdmin);
-	echo json_encode("Atualizado com sucesso.");
+	if ($password == $password_confirmation){
+		$adminToUpdate = new admin($id, $name, $password);	
+		$adminHandler = new adminHandler();
+		$adminHandler->update($adminToUpdate);
+		echo json_encode("{ret: \"Registrado com sucesso.\"}");
+		exit;
+	}else{
+		echo json_encode("{ret: \"Erro no registro.\"}");
+		exit;
+	}
+}else{
+	echo json_encode("{ret: \"Erro no registro.\"}");
 	exit;
 }
 ?>
