@@ -134,7 +134,7 @@ AkkoApp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
 	};
 
 	$scope.upload = function () {
-	    var uploadBtn = $(element[0].querySelector('#fileInput'));
+	    var uploadBtn = $(element[0].querySelector('#file_input_file'));
 	    uploadBtn.click();
   	};
 

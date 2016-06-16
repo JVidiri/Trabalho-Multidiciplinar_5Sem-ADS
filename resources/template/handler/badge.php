@@ -16,13 +16,14 @@ class badgeHandler extends dbFacade implements dbInterface{
             }
             $stmt = self::$dbHandler->prepare("INSERT INTO 
             									`badge`(`fk_type_id`, `title`, `description`, `thumb`) 
-            									VALUES (:type,:title,:description,:thumb)");
+            									VALUES (:fk_type_id,:title,:description,:thumb)");
 
-            $stmt->bindValue(':type', $toAdd->type);
+            $stmt->bindValue(':fk_type_id', $toAdd->fk_type_id, PDO::PARAM_INT);
             $stmt->bindValue(':title', $toAdd->title);
             $stmt->bindValue(':description', $toAdd->description);
             $stmt->bindValue(':thumb', $toAdd->thumb);            
-            $ret = $stmt->execute();
+            $stmt->debugDumpParams();
+            $ret = $stmt->execute();            
             return $ret;
         }else{
             //TODO return error;
@@ -49,7 +50,7 @@ class badgeHandler extends dbFacade implements dbInterface{
                                                 SET `type` = :type , `title` = :title, `description` = :description, `thumb` = :thumb 
                                                 WHERE `badge_id` = :badge_id ");
 
-            $stmt->bindValue(':badge_id', $toUpdate->badge_id);
+            $stmt->bindValue(':badge_id', $toUpdate->badge_id, PDO::PARAM_INT);
             $stmt->bindValue(':title', $toUpdate->title);        
             $stmt->bindValue(':description', $toUpdate->description);        
             $stmt->bindValue(':thumb', $toUpdate->thumb);        

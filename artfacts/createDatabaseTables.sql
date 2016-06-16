@@ -263,7 +263,7 @@ create table badge_type(
 
 # medals will be created by the internal team.
 create table badge(
-	badge_id int not null,
+	badge_id int auto_increment,
 	fk_type_id int not null,
 	title varchar(64) not null,
 	description varchar(511),

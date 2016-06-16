@@ -14,11 +14,13 @@ require_once($rootPath . '/resources/template/handler/badge.php');
 $requestBody = file_get_contents('php://input');
 $badge = json_decode($requestBody);
 if ($badge){
-	$type = $badge->type;
+	$type = $badge->fk_type_id;
 	$title = $badge->title;
 	$description = $badge->description;	
-	$thumb = $badge->thumb;		
-	$newBadge = new badge(NULL, $name, $type, $title, $description, $thumb);	
+	$thumb = $badge->thumb;
+
+	$newBadge = new badge(NULL, $type, $title, $description, $thumb);	
+	var_dump($newBadge);
 	$badgeHandler = new badgeHandler();
 	$badgeHandler->insert($newBadge);
 	echo json_encode("{ret: \"Registrado com sucesso.\"}");

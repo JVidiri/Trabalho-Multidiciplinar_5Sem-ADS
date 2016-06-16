@@ -1,4 +1,4 @@
-var app = angular.module('AkkoAdminApp', ['ngMaterial', 'ngMdIcons', 'wt.responsive']);
+var app = angular.module('AkkoAdminApp', ['ngMaterial', 'ngMdIcons', 'wt.responsive', 'ngFileUpload']);
 app.config(function($compileProvider){
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|javascript):/);
 });
@@ -6,16 +6,7 @@ app.config(function($compileProvider){
 var parentEl = angular.element(document.body);
 var actualItem = null;
 
-app.controller('badgeTypeLoader', function($scope, $http) {
-  $scope.badgeTypes = [];
-  $http.get('/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badgeType.php?lastElement=0')
-    .then(function(res){      
-      $scope.badgeTypes = res.data;
-    });    
-  $scope.selectedBadgeType = $scope.badgeTypes[0];
-});
-
-app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$location', function($scope, $http,$mdBottomSheet, $mdSidenav, $mdDialog, $location){
+app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$mdDialog', '$location', 'fileUpload', function($scope, $http,$mdBottomSheet, $mdSidenav, $mdDialog, $location, fileUpload){
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();          
   };
@@ -116,14 +107,35 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   ];
 
   $scope.list = [];
-  $scope.badgeTypes = [];  
+  $scope.badgeTypes = [];
+
+  $scope.loadBadgeTypes = function(ev) {  
+    $http.get('/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badgeType.php?lastElement=0')
+      .then(function(res){      
+        $scope.badgeTypes = res.data;      
+    });    
+  };
+
+  $scope.onFileSelect = function($files) {
+    //$files: an array of files selected, each file has name, size, and type.
+    for (var i = 0; i < $files.length; i++) {
+      var $file = $files[i];
+      $upload.upload({
+        url: 'my/upload/urlList',
+        file: $file,
+        progress: function(e){}
+      }).then(function(data, status, headers, config) {
+        // file is uploaded successfully
+        console.log(data);
+      }); 
+    }
+  };
 
   $scope.loadJson = function(ev) {
     $http.get(actualItem.urlList)
     .then(function(res){
       $scope.list = res.data;      
     });
-
   };
 
   $scope.deleteById = function(ev, row){    
@@ -141,7 +153,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
 
   $scope.updateById = function(ev, row){ 
     var data = {};
-    data[actualItem.idName] = row[actualItem.idName];
+    data[actualItem.idName] = row[actualItem.idName];  
 
     //de row para um objeto    
     var objectToPass = {};
@@ -164,7 +176,8 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   };
 
   $scope.insertNew = function(ev) {    
-    var data = $scope.fields;    
+    var data = $scope.fields;
+    console.log($scope.fields);
     //Se não tem data em fields é sinal de que temos um campo para update.
     if (!data){
       data = $scope.dataFields;
@@ -208,6 +221,13 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     });
   };
 
+  $scope.uploadFile = function(){
+    var file = $scope.fields.thumb;
+    var uploadUrl = "/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/uploadFiles.php";
+    fileUpload.uploadFileToUrl(file, uploadUrl);
+    $scope.fields.thumb = file.name;
+  };
+
 }]);
 
 function DialogController($scope, $mdDialog) {
@@ -221,6 +241,39 @@ function DialogController($scope, $mdDialog) {
     $mdDialog.hide(answer);
   };
 };
+
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+app.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(data, status, headers, config){          
+          file = data;
+        })
+        .error(function(){
+          console.log('Errrooou!');
+        });
+    }
+}]);
 
 app.config(
   function($mdThemingProvider) {
