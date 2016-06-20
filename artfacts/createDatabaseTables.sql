@@ -57,9 +57,9 @@ create table profile(
 
     /* Store countries */
 	create table country(
-		country_id int,# Not auto_increment because that will be used for phone too, and in phone there is a standart.
+		country_id int not null unique,# Not auto_increment because that will be used for phone too, and in phone there is a standart.
 		name varchar(255) not null,
-		thumb_pic varchar(255) not null,
+		thumb varchar(255) not null,
 		UF char(3) not null,
 		#constrants
 		PRIMARY KEY (country_id)
@@ -219,7 +219,7 @@ create table profile(
 
 /* This will store a user post. */
 create table post(
-	post_id int,	
+	post_id int auto_increment,	
 	fk_user_id int not null, #fk for user,
 	content varchar(1024) not null,
 	date_of_post date not null,
@@ -231,7 +231,7 @@ create table post(
 
 	/* This will store the attachiments */
 	create table attachment(
-		attachment_id int,
+		attachment_id int auto_increment,
 		att_date date not null,
 		att_path varchar(500) not null, #Where the file was stored in the server, 
 									    #depending on the infra we choose it would be a URL;

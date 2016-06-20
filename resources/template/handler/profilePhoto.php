@@ -7,7 +7,7 @@ require_once($rootPath . '/resources/template/sql/dbFacade.php');
 require_once($rootPath . '/resources/template/sql/dbInterface.php');
 require_once($rootPath . '/resources/template/types/profilePhoto.php');
 
-class publishedWorkHandler extends dbFacade implements dbInterface{
+class profilePhotoHandler extends dbFacade implements dbInterface{
 
     public function insert($toAdd){
         if ($this->isRightType($toAdd, "profilePhoto")){
@@ -20,7 +20,8 @@ class publishedWorkHandler extends dbFacade implements dbInterface{
             //TODO must be trgger to update te date.
             $stmt->bindValue(':profile_photo_id', $toAdd->profile_photo_id);            
             $stmt->bindValue(':fk_profile_id', $toAdd->fk_profile_id);
-            $stmt->bindValue(':photo_path', $toAdd->photo_path);            
+            var_dump($toAdd->photo_path);
+            $stmt->bindValue(':photo_path', $toAdd->photo_path);
             $ret = $stmt->execute();
             return $ret;
         }else{

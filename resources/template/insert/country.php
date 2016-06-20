@@ -13,13 +13,12 @@ require_once($rootPath . '/resources/template/handler/country.php');
 */
 $requestBody = file_get_contents('php://input');
 $country = json_decode($requestBody);
-if ($country){
-	$country_id = $country->country_id;
-	$name = $$country->name;
-	$thumb_pic = $$country->thumb_pic;	
+if ($country){		
+	$name = $country->name;
+	$thumb = $country->thumb;	
 	$uf = $country->uf;
 
-	$newCountry = new country(NULL, $name, $country_id, $name, $thumb_pic, $uf);	
+	$newCountry = new country(NULL, $name, $thumb, $uf);	
 	$countryHandler = new countryHandler();
 	$countryHandler->insert($newCountry);
 	echo json_encode("{ret: \"Registrado com sucesso.\"}");

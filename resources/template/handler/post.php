@@ -1,33 +1,29 @@
 <?php
 /*
-    Class to work with the user in database.
+    Class to post with the user in database.
 */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 require_once($rootPath . '/resources/template/sql/dbFacade.php');
 require_once($rootPath . '/resources/template/sql/dbInterface.php');
-require_once($rootPath . '/resources/template/types/userProfile.php');
+require_once($rootPath . '/resources/template/types/post.php');
 
-class userProfileHandler extends dbFacade implements dbInterface{
+class postHandler extends dbFacade implements dbInterface{
 
-    public function insert($toAdd){
-        if ($this->isRightType($toAdd, "userProfile")){
+	 public function insert($toAdd){
+        if ($this->isRightType($toAdd, "post")){
             if(!self::$dbHandler) {
                 $this->connect();
             }
             $stmt = self::$dbHandler->prepare("INSERT INTO `profile`(`fk_user_id`, `fk_profile_type_id`, `complete_name`, `about`, `birth`, `alias`, `curriculum`) 
                 VALUES (:user_id, :profile_type, :complete_name, :about, :birth, :alias, :curriculum)");
 
-            $stmt->bindValue(':user_id', $toAdd->user->user_id);
-            $stmt->bindValue(':profile_type', $toAdd->profile_id);
-            $stmt->bindValue(':complete_name', $toAdd->complete_name);
-            $stmt->bindValue(':about', $toAdd->about);
-            $stmt->bindValue(':birth', $toAdd->birth);
-            $stmt->bindValue(':alias', $toAdd->alias);
-            $stmt->bindValue(':curriculum', $toAdd->curriculum);
-            $ret = $stmt->execute();
+            $stmt->bindValue(':user_id', $toAdd->fk_user_id);
+            $stmt->bindValue(':profile_type', $toAdd->fk_profile_type_id);
+            $stmt->bindValue(':complete_name', $toAdd->complete_name);            
+            $ret = $stmt->execute();           
 
-            //getting teh last inserted id to the next inserts.
-            $id = $dbHandler->lastInsertedID();            
+            //getting the last inserted id to the next inserts.
+            $id = self::$dbHandler->lastInsertId();            
             return $id;
         }else{
             //TODO return error;
@@ -46,7 +42,7 @@ class userProfileHandler extends dbFacade implements dbInterface{
     }
 
     public function update($toUpdate){
-        if ($this->isRightType($toAdd, "userProfile")){
+        if ($this->isRightType($toAdd, "profile")){
             if(!self::$dbHandler) {
                 $this->connect();
             }
@@ -94,3 +90,4 @@ class userProfileHandler extends dbFacade implements dbInterface{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+?>

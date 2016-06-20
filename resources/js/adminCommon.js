@@ -47,10 +47,13 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   {
     title: 'País',
     icon: 'room',
-    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0',
+    idName: 'country_id',    
+    urlInsert: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/insert/country.php',
     urlInsertTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/form/createCountry.php',
+    urlList: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/country.php?lastElement=0',
     urlDelete: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/delete/country.php',
-    idName: 'country_id'
+    urlUpdate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/country.php',
+    urlUpdateTemplate: '/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/update/countryUpdateForm.php'
   },
   {
     title: 'Distrito governamental',
@@ -107,7 +110,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
   ];
 
   $scope.list = [];
-  $scope.badgeTypes = [];
+  $scope.badgeTypes = [];  
 
   $scope.loadBadgeTypes = function(ev) {  
     $http.get('/Trabalho-Multidiciplinar_5Sem-ADS/resources/template/list/badgeType.php?lastElement=0')
@@ -115,6 +118,8 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
         $scope.badgeTypes = res.data;      
     });    
   };
+
+  $scope.loadBadgeTypes();
 
   $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
@@ -161,6 +166,8 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
       objectToPass[Object.keys(row)[i]] = row[Object.keys(row)[i]];
     };
     
+    objectToPass
+
     $mdDialog.show({
       controller: ['$scope', 'dataFields', function($scope, dataFields) {
         $scope.dataFields = dataFields;   
@@ -181,6 +188,7 @@ app.controller('AppCtrl', ['$scope', '$http', '$mdBottomSheet','$mdSidenav', '$m
     //Se não tem data em fields é sinal de que temos um campo para update.
     if (!data){
       data = $scope.dataFields;
+      console.log($scope.dataFields);
       $http.post(actualItem.urlUpdate, data)
       .success(function (data, status, headers, config) {      
         $scope.PostDataResponse = data;

@@ -49,9 +49,18 @@ if (isset($_GET['logoff'])){
 			unset($_SESSION['password']);			
 			$accessErrorMessage = 'Usuário e senha incorretos, <a href="register.php">cadastre-se!</a>';		
 		}else{
-			$userHandler->updateLastLogin($result->user_id); 
+			$userHandler->updateLastLogin($result->user_id);
+			$_SESSION['userId'] = $result->user_id;
 			$username = $result->name;
 		}
 	}
+}
+if (isset($accessErrorMessage)){
+	echo "<div class='error'>";
+	echo "<p>";
+	echo $accessErrorMessage;
+	echo "</p>";
+	echo "</div>";
+	exit;
 }
 ?>

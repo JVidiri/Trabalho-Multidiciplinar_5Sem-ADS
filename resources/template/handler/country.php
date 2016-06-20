@@ -15,12 +15,12 @@ class countryHandler extends dbFacade implements dbInterface{
                 $this->connect();
             }
             $stmt = self::$dbHandler->prepare("INSERT INTO 
-            									`country`(`country_id`, `name`, `thumb_pic`, `uf`) 
-            									VALUES (:country_id,:name,:thumb_pic,:uf)");
+            									`country`(`country_id`, `name`, `thumb`, `uf`) 
+            									VALUES (:country_id,:name,:thumb,:uf)");
 
             $stmt->bindValue(':country_id', $toAdd->country_id);
             $stmt->bindValue(':name', $toAdd->name);
-            $stmt->bindValue(':thumb_pic', $toAdd->thumb_pic);
+            $stmt->bindValue(':thumb', $toAdd->thumb);
             $stmt->bindValue(':uf', $toAdd->uf);            
             $ret = $stmt->execute();
             return $ret;
@@ -46,12 +46,12 @@ class countryHandler extends dbFacade implements dbInterface{
                 $this->connect();
             }             
             $stmt = self::$dbHandler->prepare("UPDATE `country` 
-                                                SET `country_id` = :country_id , `name` = :name, `thumb_pic` = :thumb_pic, `uf` = :uf 
+                                                SET `country_id` = :country_id , `name` = :name, `thumb` = :thumb_pic, `uf` = :uf 
                                                 WHERE `badge_id` = :badge_id ");
 
             $stmt->bindValue(':country_id', $toUpdate->country_id);
             $stmt->bindValue(':name', $toUpdate->name);        
-            $stmt->bindValue(':thumb_pic', $toUpdate->thumb_pic);        
+            $stmt->bindValue(':thumb', $toUpdate->thumb);        
             $stmt->bindValue(':uf', $toUpdate->uf);        
             $ret = $stmt->execute();
             return $ret;

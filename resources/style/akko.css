@@ -43,6 +43,10 @@ h3{
   margin: 0 10px;
 }
 
+.md-datepicker-input{
+  min-width: 145px !important;
+}
+
 /* fallback */
 @font-face {
   font-family: 'Material Icons';

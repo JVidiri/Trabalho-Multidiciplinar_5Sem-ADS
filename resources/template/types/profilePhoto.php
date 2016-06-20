@@ -16,7 +16,7 @@ class profilePhoto{
 	public $photo_path;
 	public $update_date;
 
-	public function __construct(profile_photo_id, fk_profile_id, photo_path, update_date){
+	public function __construct($profile_photo_id, $fk_profile_id, $photo_path, $update_date){
 		$this->profile_photo_id = $profile_photo_id;
 		$this->fk_profile_id = $fk_profile_id;
 		$this->photo_path = $photo_path;

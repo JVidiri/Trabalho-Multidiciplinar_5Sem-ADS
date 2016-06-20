@@ -1,7 +1,6 @@
 <?php	
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/Trabalho-Multidiciplinar_5Sem-ADS/resources/inc.php');
 	require_once($rootPath . '/resources/template/handler/profileType.php');
-	require_once($rootPath.'/resources/adminAccessControl.php');
 
 	$profileTypeHandler = new profileTypeHandler();
 	//var_dump($profileTypeHandler->select($_GET['lastElement'])); exit();
