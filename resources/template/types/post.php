@@ -13,7 +13,7 @@
 class post{
 	public $post_id;
 	public $fk_user_id;	
-    public $content;
+    public $conte//nt;
     public $date_of_post;
 
     public function __construct($post_id, $fk_user_id, $content, $date_of_post){

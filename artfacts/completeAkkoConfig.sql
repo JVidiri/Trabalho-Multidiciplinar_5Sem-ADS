@@ -418,6 +418,8 @@ insert into profile_badge values (665, 666, 01, STR_TO_DATE('23/03/2016', '%d/%m
 	  Caio Martoni;
 */
 
+
+
 /* 
 	Updates the last login date from given user.
 */
@@ -439,4 +441,8 @@ CREATE EVENT evt_delete_inactive_user
 	STARTS '2016-3-28 00:00:00'
 DO
   	DELETE FROM user Where is_confirmed = 0;
+
+CREATE TRIGGER `profilePhotoInsert` BEFORE INSERT ON `profile_photo` FOR EACH ROW SET NEW.update_date = NOW();
+
+CREATE TRIGGER `profilePhotoUpdate` BEFORE UPDATE ON `profile_photo` FOR EACH ROW SET NEW.update_date = NOW();
 

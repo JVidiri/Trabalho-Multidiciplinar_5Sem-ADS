@@ -17,11 +17,10 @@ class profilePhotoHandler extends dbFacade implements dbInterface{
             $stmt = self::$dbHandler->prepare("INSERT INTO `profile_photo`(
                                                 `profile_photo_id`, `fk_profile_id`, `photo_path`) 
                                                 VALUES (:profile_photo_id, :fk_profile_id, :photo_path)");
-            //TODO must be trgger to update te date.
+            
             $stmt->bindValue(':profile_photo_id', $toAdd->profile_photo_id);            
-            $stmt->bindValue(':fk_profile_id', $toAdd->fk_profile_id);
-            var_dump($toAdd->photo_path);
-            $stmt->bindValue(':photo_path', $toAdd->photo_path);
+            $stmt->bindValue(':fk_profile_id', $toAdd->fk_profile_id);            
+            $stmt->bindValue(':photo_path', $toAdd->photo_path);            
             $ret = $stmt->execute();
             return $ret;
         }else{

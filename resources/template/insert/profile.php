@@ -27,9 +27,8 @@ if ($data){
 	$profileHandler = new profileHandler();
 	$profile_id = $profileHandler->insert($newProfile);
 
-	$profilePhoto = $data->photo_path;
-	$date = (new DateTime())->Format('Y-m-d H:i:s');
-	$newProfilePhoto = new profilePhoto(NULL, $profile_id, $profilePhoto, $date);
+	$profilePhoto = $data->photo_path;	
+	$newProfilePhoto = new profilePhoto(NULL, $profile_id, $profilePhoto, NULL);
 	$profilePhotoHandler = new profilePhotoHandler();
 	$profilePhotoHandler->insert($newProfilePhoto);
 

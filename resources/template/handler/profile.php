@@ -14,8 +14,9 @@ class profileHandler extends dbFacade implements dbInterface{
             if(!self::$dbHandler) {
                 $this->connect();
             }
-            $stmt = self::$dbHandler->prepare("INSERT INTO `profile`(`fk_user_id`, `fk_profile_type_id`, `complete_name`, `about`, `birth`, `alias`, `curriculum`) 
-                VALUES (:user_id, :profile_type, :complete_name, :about, :birth, :alias, :curriculum)");
+            $stmt = self::$dbHandler->prepare("INSERT INTO `profile`
+                                                (`fk_user_id`, `fk_profile_type_id`, `complete_name`, `about`, `birth`, `alias`, `curriculum`) 
+                                                VALUES (:user_id, :profile_type, :complete_name, :about, :birth, :alias, :curriculum)");
 
             $stmt->bindValue(':user_id', $toAdd->fk_user_id);
             $stmt->bindValue(':profile_type', $toAdd->fk_profile_type_id);

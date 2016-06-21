@@ -34,8 +34,8 @@ class countryHandler extends dbFacade implements dbInterface{
             $this->connect();
         }
         $stmt = self::$dbHandler->prepare("DELETE FROM `country` 
-                                            WHERE `country_id` = :country_id");
-        $stmt->bindValue(':toDelete', $toDelete);
+                                            WHERE `country_id` = :toDelete");
+        $stmt->bindValue(':toDelete', $toDelete, PDO::PARAM_INT);
         $ret = $stmt->execute();
         return $ret;
     }
